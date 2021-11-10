@@ -19,4 +19,9 @@ public class NoteService extends BaseService<Note, UUID> {
     public Note shareNote(Note note){
         //todo;
     }
+
+    public Note editNote(Note note) {
+        //todo
+    }
+
 }
