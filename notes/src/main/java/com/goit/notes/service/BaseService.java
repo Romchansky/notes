@@ -21,7 +21,7 @@ public abstract class BaseService<E extends BaseEntity<ID>, ID> {
 
     public Optional<E> findById(ID id){ return repository.findById(id); }
 
-    public void delete(ID id){ repository.deleteById (id); }
+    public void delete(E e){ repository.delete (e); }
 
 }
 
