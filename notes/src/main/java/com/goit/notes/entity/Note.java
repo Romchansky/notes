@@ -17,7 +17,6 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.UUID;
@@ -45,7 +44,8 @@ public class Note implements BaseEntity<UUID> {
     @Size(min = 5, max = 100, message = "Name length must be 5-100 symbols")
     @Column(name = "name", length = 100)
     private String name;
-
+    
+    @NotBlank
     @Size(min = 5, max = 10000, message = "Text length must be 5-10000 symbols")
     @Column(name = "description", length = 10000)
     private String description;
