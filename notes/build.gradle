@@ -20,6 +20,13 @@ repositories {
 	mavenCentral()
 }
 
+flyway{
+	url='jdbc:postgresql://localhost:5432/NoteAppBase'
+	password = ''
+	user   = ''
+}
+
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
