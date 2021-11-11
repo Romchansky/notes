@@ -37,7 +37,7 @@ public class User implements BaseEntity<UUID> {
     private static final long serialVersionUID = 2868572978213680209L;
 
     @Id
-    @GeneratedValue(generator = "UUId")
+    @GeneratedValue(generator = "UUID")
     @GenericGenerator (name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Type (type = "uuid-char")
     @Column(name = "id")
