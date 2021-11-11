@@ -5,17 +5,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Enumerated;
-import javax.persistence.GenerationType;
 import javax.persistence.EnumType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.UUID;
@@ -33,7 +35,9 @@ public class Note implements BaseEntity<UUID> {
     private static final long serialVersionUID = -748835835046696866L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "UUId")
+    @GenericGenerator (name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Type (type = "uuid-char")
     @Column(name = "id")
     private UUID id;
 

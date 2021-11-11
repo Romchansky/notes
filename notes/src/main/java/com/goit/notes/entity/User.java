@@ -17,13 +17,15 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -35,7 +37,9 @@ public class User implements BaseEntity<UUID> {
     private static final long serialVersionUID = 2868572978213680209L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "UUId")
+    @GenericGenerator (name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Type (type = "uuid-char")
     @Column(name = "id")
     private UUID id;
 
