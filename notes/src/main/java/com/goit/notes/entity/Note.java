@@ -33,7 +33,7 @@ public class Note implements BaseEntity<UUID> {
     private static final long serialVersionUID = -748835835046696866L;
 
     @Id
-    @GeneratedValue(generator = "UUId")
+    @GeneratedValue(generator = "UUID")
     @GenericGenerator (name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Type (type = "uuid-char")
     @Column(name = "id")
