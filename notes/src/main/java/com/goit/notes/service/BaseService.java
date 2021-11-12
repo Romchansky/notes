@@ -13,7 +13,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public abstract class BaseService<E extends BaseEntity<ID>, ID> {
 
-    private final JpaRepository<E, ID> repository;
+    protected final JpaRepository<E, ID> repository;
 
     public E  save (E entity){ return repository.save(entity); }
 
