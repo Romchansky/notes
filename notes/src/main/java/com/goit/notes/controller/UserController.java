@@ -41,7 +41,7 @@ public class UserController {
         return model;
     }
 
-    @ModelAttribute("userForm")
+    @ModelAttribute("user")
     public User defaultUser() {
         return new User();
     }
