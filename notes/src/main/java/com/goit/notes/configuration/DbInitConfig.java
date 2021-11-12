@@ -10,7 +10,7 @@ import org.springframework.context.event.EventListener;
 @Configuration
 public class DbInitConfig {
 
-    private final UserRepository repository;
+/*    private final UserRepository repository;
 
     @Autowired
     public DbInitConfig(UserRepository repository) {
@@ -26,5 +26,5 @@ public class DbInitConfig {
         user.setUserRole(Role.ROLE_ADMIN);
         repository.save(user);
         repository.flush();
-    }
+    }*/
 }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Log into your account</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="login-register-form">
+        <form method="POST" class="form-signin" action="login">
+            <h2 class="form-heading">Log into your account</h2>
+
+            <div th:form="${error != null ? 'has-error' : ''}">
+                <span class="ui-state-error-text" style="color:red" th:text="${message}"></span>
+
+                <div class="form-group">
+                    <label for="username" class="form-label mt-4">Username</label>
+                    <input required type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp"
+                           placeholder="Enter your username">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="form-label mt-4">Password</label>
+                    <input required type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+                </div>
+
+                <span class="ui-state-error-text" style="color:red" th:text="${error}"></span>
+
+                <div class="form-label mt-4">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-lg btn-primary" type="submit">LOG IN</button>
+                    </div>
+                </div>
+                <h5 class="text-center"><a href="/user/register">Create an
+                    account</a>
+                </h5>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
