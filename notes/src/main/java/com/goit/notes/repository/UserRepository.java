@@ -1,14 +1,9 @@
 package com.goit.notes.repository;
 
-import com.goit.notes.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.userdetails.User;
 
-import java.util.Optional;
-import java.util.UUID;
+public interface UserRepository extends JpaRepository<User, Long> {
+    User findByUsername(String username);
 
-public interface UserRepository extends JpaRepository<User, UUID> {
-
-    Optional<User> findByUserName(String userName);
-
-    boolean existsByUserName(String userName);
 }
