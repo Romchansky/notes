@@ -25,9 +25,11 @@ public class TestSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(customUserDetailsService)
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(customUserDetailsService)
                 .passwordEncoder(new BCryptPasswordEncoder());
+
+        auth.inMemoryAuthentication().withUser("admin").password("12345").roles("ADMIN");
     }
 
 
@@ -35,6 +37,7 @@ public class TestSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests().antMatchers("/listAllUsers").access("hasRole('ROLE_ADMIN')");
+
         http.csrf ().disable ()
                 .authorizeRequests ()
                 .antMatchers ("/user/registration").permitAll ()
