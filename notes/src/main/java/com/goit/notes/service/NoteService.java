@@ -3,8 +3,10 @@ package com.goit.notes.service;
 
 import com.goit.notes.entity.Access;
 import com.goit.notes.entity.Note;
+import com.goit.notes.repository.NoteRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +17,10 @@ import java.util.UUID;
 @Slf4j
 public class NoteService extends BaseService<Note, UUID> {
 
-    private final JpaRepository<Note, UUID> repository;
+    private NoteRepository repository;
 
-    public NoteService(JpaRepository<Note, UUID> repository) {
+    public NoteService(NoteRepository repository) {
         super(repository);
-        this.repository = repository;
     }
 
     public Note createNote(Note note) {
@@ -43,8 +44,8 @@ public class NoteService extends BaseService<Note, UUID> {
     }
 }
 /*
-* проверка на ограничение длины заметки
-* поделиться заметкой должна вернуться ссылка на неё
-* редактирование ноты, каким образом она рекдактируется? просто перезапись происходит или что-то иначе
-*
-* */
+ * проверка на ограничение длины заметки
+ * поделиться заметкой должна вернуться ссылка на неё
+ * редактирование ноты, каким образом она рекдактируется? просто перезапись происходит или что-то иначе
+ *
+ * */

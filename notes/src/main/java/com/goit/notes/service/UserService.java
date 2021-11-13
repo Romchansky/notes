@@ -13,7 +13,6 @@ import java.util.UUID;
 public class UserService extends BaseService<User, UUID> {
 
     private final UserRepository repository;
-
     private final BCryptPasswordEncoder encoder;
 
     public UserService(UserRepository repository, BCryptPasswordEncoder encoder) {
@@ -37,7 +36,6 @@ public class UserService extends BaseService<User, UUID> {
 
     @Override
     public User save(User user) {
-
         user.setUserRole (user.getUserRole ());
         user.setPassword (encoder.encode (user.getPassword ()));
         return repository.save (user);
