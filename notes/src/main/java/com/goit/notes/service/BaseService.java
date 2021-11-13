@@ -15,7 +15,7 @@ public abstract class BaseService<E extends BaseEntity<ID>, ID> {
 
     private final JpaRepository<E, ID> repository;
 
-    public E  save (E entity){ return repository.save(entity); }
+    public E save (E entity){ return repository.save(entity); }
 
     public Iterable<E> findAll(){ return repository.findAll(); }
 

@@ -11,6 +11,7 @@ import java.util.UUID;
 @Service
 @Slf4j
 public class UserService extends BaseService<User, UUID> {
+
     private final UserRepository repository;
 
     private final BCryptPasswordEncoder encoder;

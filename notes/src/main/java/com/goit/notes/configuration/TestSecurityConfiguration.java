@@ -29,7 +29,7 @@ public class TestSecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(customUserDetailsService)
                 .passwordEncoder(new BCryptPasswordEncoder());
 
-        auth.inMemoryAuthentication().withUser("admin").password("12345").roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("admin").password("12345678").roles("ADMIN");
     }
 
 

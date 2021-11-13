@@ -4,6 +4,7 @@ package com.goit.notes.service;
 import com.goit.notes.entity.Access;
 import com.goit.notes.entity.Note;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,14 +12,15 @@ import java.util.UUID;
 
 
 @Service
+@Slf4j
 public class NoteService extends BaseService<Note, UUID> {
 
-    private JpaRepository<Note, UUID> repository;
+    private final JpaRepository<Note, UUID> repository;
 
     public NoteService(JpaRepository<Note, UUID> repository) {
         super(repository);
+        this.repository = repository;
     }
-
 
     public Note createNote(Note note) {
         return repository.save(note);
