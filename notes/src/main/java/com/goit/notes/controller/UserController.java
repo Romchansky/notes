@@ -5,7 +5,6 @@ import com.goit.notes.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,11 +22,11 @@ public class UserController {
 
     @GetMapping("/register")
     public String registration() {
-        return "registration";
+        return "register";
     }
 
     @PostMapping("/register")
-    public String registrationUser(@Valid User user, BindingResult result) {
+    public String registrationUser(@Valid User user) {
         userService.register (user);
         return "redirect:/login";
 

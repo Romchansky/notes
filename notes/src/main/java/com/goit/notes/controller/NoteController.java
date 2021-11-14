@@ -17,29 +17,5 @@ public class NoteController {
 
     private final NoteService noteService;
 
-    @PostMapping("/create")
-    public RedirectView createNote(Note note) {
-        //   todo ;
-    }
 
-    @PostMapping("/edit")
-    public RedirectView updateNote(Note note) {
-        //todo;
-    }
-
-    @GetMapping("/list")
-    public ModelAndView findAllNotes() {
-        //todo
-    }
-
-    @GetMapping("/delete")
-    public RedirectView deleteNote() {
-        //todo
-    }
-
-    @GetMapping("/share/id")
-    public RedirectView share() {
-
-        //todo
-    }
 }

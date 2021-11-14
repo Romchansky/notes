@@ -22,8 +22,8 @@ repositories {
 
 flyway{
 	url='jdbc:postgresql://localhost:5432/NoteAppBase'
-	password = ''
-	user   = ''
+	password = 'postgres'
+	user   = 'postgres'
 }
 
 
