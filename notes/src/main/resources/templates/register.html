@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 <title>Registration</title>
 </head>
 <body>
 
 <div class="container">
-    <form name='f' th:action="@{/user/register}" method="POST">
+    <form th:action="@{/user/register}" method="GET">
         <h3 class="card-header"> Registration </h3>
 
 

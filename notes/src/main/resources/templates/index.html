@@ -1,15 +1,14 @@
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:include="fragments :: head">
-    <title id="pageTitle">Hehehe</title>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title th:utext="${title}"></title>
 </head>
 <body>
-<div th:replace="fragments :: navibar"></div>
-<figure class="text-center">
-    <blockquote class="blockquote">
-        <h1>hehe, you are not welcome</h1>
-    </blockquote>
-</figure>
+<h1>Message : <span th:utext="${message}"></span></h1>
+
+<a th:href="@{/login}">Login</a>
+<a th:href="@{/user/register}">Register</a>
+
 </body>
 </html>
+

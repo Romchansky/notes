@@ -10,47 +10,45 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@RequiredArgsConstructor
-@Configuration
-@EnableWebSecurity
-public class TestSecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-
-    private final UserDetailsServiceImpl customUserDetailsService;
-
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserDetailsService)
-                .passwordEncoder(new BCryptPasswordEncoder());
-
-        auth.inMemoryAuthentication().withUser("admin").password("12345678").roles("ADMIN");
-    }
-
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-
-        http.authorizeRequests().antMatchers("/listAllUsers").access("hasRole('ROLE_ADMIN')");
-
-        http.csrf ().disable ()
-                .authorizeRequests ()
-                .antMatchers ("/user/registration").permitAll ()
-                .anyRequest ().authenticated ()
-                .and ()
-                .formLogin ()
-                .loginPage ("/login")
-                .defaultSuccessUrl ("/")
-                .permitAll ()
-                .and ()
-                .logout ()
-                .permitAll ();
-    }
-
-
-}
+//@RequiredArgsConstructor
+//@Configuration
+//@EnableWebSecurity
+//public class TestSecurityConfiguration extends WebSecurityConfigurerAdapter {
+//
+//
+//    private final UserDetailsServiceImpl customUserDetailsService;
+//
+//    @Bean
+//    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+//
+//
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(customUserDetailsService)
+//                .passwordEncoder(new BCryptPasswordEncoder());
+//
+//        auth.inMemoryAuthentication().withUser("admin").password("12345678").roles("ADMIN");
+//    }
+//
+//
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//
+//        http.authorizeRequests().antMatchers("/listAllUsers").access("hasRole('ROLE_ADMIN')");
+//
+//        http.csrf ().disable ()
+//                .authorizeRequests ()
+//                .antMatchers ("/user/registration").permitAll ()
+//                .anyRequest ().authenticated ()
+//                .and ()
+//                .formLogin ()
+//                .loginPage ("/login")
+//                .defaultSuccessUrl ("/")
+//                .permitAll ()
+//                .and ()
+//                .logout ()
+//                .permitAll ();
+//    }
+//}

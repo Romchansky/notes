@@ -1,41 +1,35 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Log In </title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-          crossorigin="anonymous" />
+    <meta charset="UTF-8">
+    <title th:utext="${title}"></title>
 </head>
 <body>
-<div class="container-fluid text-center">
-    <div>
-        <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto;">
-            <div class="border border-secondary p-3 rounded">
-                <p>Log in your account</p>
-                <p>
-                    <input type="text" name="username" class="form-control" placeholder="Enter your username"
-                           required autofocus="autofocus"/>
-                    <span></span>
-                </p>
-                <p>
-                    <input type="password" name="password" class="form-control" placeholder="Enter your password"
-                           required autofocus="autofocus"/>
-                </p>
-                <p>
-                    <input type="checkbox" name="remember-me" />&nbsp;Remember Me
-                </p>
-                <p>
-                    <input type="submit" value="Login" class="btn btn-warning" />
-                </p>
-            </div>
+
+<h1>Message : <span th:utext="${message}"></span></h1>
+
+<div class="container">
+    <form th:action="@{/login}" method="POST">
+        <h3 class="card-header"> Login </h3>
+
+
+        <div class="card-body">
             <div>
-                <h5 class="text-center"><a href="user/register"> Don't register? Create an account</a>
-                </h5>
+                <label>Username</label>
+                <input type="text" class="form-control form-control-sm" name="userName">
             </div>
-        </form>
-    </div>
+
+            <div class="pt-3">
+                <label>Password</label>
+                <input class="form-control form-control-sm" type="password" name="password">
+            </div>
+
+            <button type="submit" class="btn btn-primary float-right"> Registration</button>
+
+        </div>
+    </form>
 </div>
+
+
 </body>
 </html>
