@@ -18,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 import java.util.UUID;
 
 @Entity
@@ -76,5 +77,25 @@ public class Note implements BaseEntity<UUID> {
         result = 31 * result + access.hashCode();
         result = 31 * result + user.hashCode();
         return result;
+    }
+
+    @Override
+    public Collection<? extends BaseEntity> getBaseEntity() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 }

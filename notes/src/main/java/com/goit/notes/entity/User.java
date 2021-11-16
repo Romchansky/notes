@@ -19,8 +19,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
+
+import static org.apache.catalina.realm.UserDatabaseRealm.getRoles;
 
 @Entity
 @Table(name = "user")
@@ -44,7 +47,7 @@ public class User implements BaseEntity<UUID> {
     @Column(name = "user_name", unique = true, length = 50)
     private String userName;
 
-    @NotBlank
+    @NotBlank(message = "Password cannot be empty")
     @Size(min = 8, max = 100, message = "Password  must be 8-100 symbols")
     @Column(name = "password", length = 100)
     private String password;
@@ -52,6 +55,7 @@ public class User implements BaseEntity<UUID> {
     @Column(name = "user_role", length = 10)
     @Enumerated(EnumType.STRING)
     private Role userRole;
+    private boolean active;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude
@@ -80,4 +84,34 @@ public class User implements BaseEntity<UUID> {
         result = 31 * result + notes.hashCode();
         return result;
     }
+
+    public boolean isAdmin() {
+        return roles.contains(Role.ADMIN);
+    }
+
+    @Override
+    public Collection<? extends BaseEntity> getBaseEntity() {
+        return getRoles();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
+
 }
