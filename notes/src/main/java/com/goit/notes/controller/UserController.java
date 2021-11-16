@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import javax.validation.Valid;
 
+import javax.validation.Valid;
 
 @RequiredArgsConstructor
 @Controller
@@ -29,11 +29,13 @@ public class UserController {
     @GetMapping("/register")
     public String registration(Model model) {
         model.addAttribute("title", "Registration");
+        model.addAttribute("message","Register for using note service");
         return "register";
     }
 
+
     @PostMapping("/register")
-    public String registrationUser(@Valid User user, BindingResult result, Model model)
+    public String registrationUser(@Valid User user, BindingResult result)
     {
         if(result.hasErrors ()){
             return "register";
@@ -44,10 +46,10 @@ public class UserController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/listUsers")
+    @GetMapping(path = "/listUsers")
     public ModelAndView showAllUsersPage(ModelAndView model) {
-        model.addObject("users", userService.findAll());
-        model.setViewName("listUsers");
+        model.addObject ("users", userService.findAll ());
+        model.setViewName ("listUsers");
         return model;
     }
 
@@ -56,4 +58,3 @@ public class UserController {
         return new User();
     }
 }
-

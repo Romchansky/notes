@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:utext="${title}"></title>
+</head>
+<body>
+<h1>  <span  th:utext="${message}"></span></h1>
+<form th:action="@{/note/listNotes}" method="GET" >
+    <h2>hello list notes</h2>
+</form>
+
+    <div class="table">
+        <table>
+            <thead>
+            <tr>
+                <th> Id </th>
+                <th> Name </th>
+                <th> Description </th>
+                <th > Access </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="note : ${notes}">
+                <td> <span th:text="${notes.id}"> Id </span></td>
+                <td> <span th:text="${notes.name}"> Name </span></td>
+                <td> <span th:text="${notes.description}"> Description </span></td>
+                <td> <span th:text="${notes.access}"> Access </span></td>
+            </tr>
+            </tbody>
+        </table>
+
+
+
+    </div>
+
+
+</body>
+</html>

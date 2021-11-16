@@ -29,7 +29,10 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(customUserDetailsService)
                 .passwordEncoder(new BCryptPasswordEncoder());
 
-        auth.inMemoryAuthentication().withUser("admin").password("12345678").roles("ADMIN");
+        auth.inMemoryAuthentication()
+                .withUser("admin")
+                .password("super_secret_password")
+                .roles("ADMIN");
     }
 
 
@@ -49,19 +52,17 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         // config
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/user/register").permitAll()
                 .antMatchers("/login").permitAll()
+                .antMatchers("/user/register").permitAll()
                 .and()
                 .formLogin()
-                .loginProcessingUrl("/") // submit URL
                 .loginPage("/login")
-                .defaultSuccessUrl("/userInfo")
+                .defaultSuccessUrl("/listNotes") // поменять на правильный урл
                 .failureUrl("/login?error=true")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 // logout config
-                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
+                .and().logout().logoutUrl("/logout");
 
 
     }

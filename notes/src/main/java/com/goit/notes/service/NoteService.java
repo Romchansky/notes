@@ -22,7 +22,7 @@ public class NoteService extends BaseService<Note, UUID> {
 
     }
 
-    public Note createNote(Note note) {
+    public Note create(Note note) {
         if (note.getDescription().length() > 10000) {
             log.info("The length note can't be more than 10_000 symbols");
         }
@@ -30,7 +30,7 @@ public class NoteService extends BaseService<Note, UUID> {
 
     }
 
-    public String shareNote(Note note) {
+    public String share(Note note) {
         if (note.getAccess().equals(Access.PRIVATE)) {
             log.info("You can't share this note, because this note has a private access type");
         }
@@ -38,7 +38,7 @@ public class NoteService extends BaseService<Note, UUID> {
         return url;
     }
 
-    public Note editNote(Note note) {
-        return createNote(note);
+    public Note edit(Note note) {
+        return create(note);
     }
 }
