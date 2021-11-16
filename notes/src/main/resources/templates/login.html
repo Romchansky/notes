@@ -14,15 +14,16 @@ background-size: cover;">
 </div>
 <div class="container">
     <form th:action="@{/login}" method="GET" >
+
         <div class="card-body" style="text-align: center">
             <div>
                 <input type="text" class="form-control form-control-sm" name="userName" placeholder="Enter your username"
-                       style=" max-width: 300px; padding: 10px; margin: 0 auto;text-decoration-color: blanchedalmond">
+                       th:required="require"  style=" max-width: 300px; padding: 10px; margin: 0 auto">
             </div>
             <div class="pt-3" style="text-align: center">
 
                 <input class="form-control form-control-sm" type="password" name="password" placeholder="Enter your password"
-                       style=" max-width: 300px; padding: 10px; margin: 0 auto" checked>
+                       th:required="required"   style=" max-width: 300px; padding: 10px; margin: 0 auto"/>
             </div>
 
             <button class="btn btn-lg btn-primary" type="submit">LOG IN</button>

@@ -3,7 +3,7 @@
 <head>
 <title th:utext="${title}"></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous"/>
 </head>
 <body style="padding-left: 15px;padding-right: 20px; background-image:url(https://thumbs.dreamstime.com/b/%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%87%D0%B0%D0%BD%D0%B8%D1%8F-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B7%D1%80%D0%B5%D0%BD%D0%B8%D1%8F-%D0%BF%D0%BE%D0%BB%D0%B5%D1%82%D0%B0-%D0%BB%D0%B8%D0%BF%D0%BA%D0%B8%D0%B5-109773277.jpg);
 background-size: cover;">
@@ -13,17 +13,17 @@ background-size: cover;">
         <h3 class="card-header" style="text-align: center"> Register for using note service </h3>
 
         <div class="card-body" style="text-align: center">
-            <input type="text" class="form-control form-control-sm" name="userName" placeholder="Enter your username" th:autofocus="autofocus"
+            <input type="text" class="form-control form-control-sm" name="userName"  placeholder="Enter your username"
+                   th:required="require" th:autofocus="true" minlength="5" maxlength="50"
                    style=" max-width: 300px; padding: 10px; margin: 0 auto;">
         </div>
 
         <div class="pt-3" style="text-align: center">
-            <input class="form-control form-control-sm" type="password" name="password" placeholder="Enter your password" th:autofocus="autofocus"
-                   style=" max-width: 300px; padding: 10px; margin: 0 auto">
+            <input class="form-control form-control-sm" type="password" name="password" placeholder="Enter your password" th:autofocus="false"
+                   th:required="require"  style=" max-width: 300px; padding: 10px; margin: 0 auto " minlength="8" maxlength="100">
 
             <button class="btn btn-lg btn-primary" type="submit">REGISTER</button>
 
-        </div>
         </div>
     </form>
 </div>

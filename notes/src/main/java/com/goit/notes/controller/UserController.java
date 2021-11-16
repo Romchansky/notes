@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registrationUser(@Valid User user, BindingResult result)
+    public String registrationUser(@Valid User user, BindingResult result, Model model)
     {
         if(result.hasErrors ()){
             return "register";
