@@ -2,15 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title th:utext="${title}"></title>
+  <meta charset="UTF-8">
+  <title th:utext="${title}"></title>
 </head>
 <body>
 <h1>Message : <span th:utext="${message}"></span></h1>
-
-<a th:href="@{/login}">Login</a>
-<a th:href="@{/user/register}">Register</a>
-<a th:href="@{/note/listNotes}">Note list</a>
-
+<form th:action="@{/create}" method="GET" >
+  <h2>hello list notes</h2>
+</form>
 
 </body>
 </html>

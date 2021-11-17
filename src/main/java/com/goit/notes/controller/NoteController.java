@@ -3,7 +3,9 @@ package com.goit.notes.controller;
 import com.goit.notes.entity.Note;
 import com.goit.notes.entity.User;
 import com.goit.notes.service.NoteService;
+import com.goit.notes.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -22,10 +25,13 @@ public class NoteController {
 
     private final NoteService noteService;
 
+
     @GetMapping("/listNotes")
-    public ModelAndView listAllNotes(User user, ModelAndView modelAndView, Model model) {
+    public ModelAndView listAllNotes(@AuthenticationPrincipal User user, ModelAndView modelAndView, Model model) {
+
         model.addAttribute("title", "List Notes");
         model.addAttribute("message", "list all notes");
+
         modelAndView.addObject("note", user.getNotes());
         modelAndView.setViewName("listNote");
         return modelAndView;

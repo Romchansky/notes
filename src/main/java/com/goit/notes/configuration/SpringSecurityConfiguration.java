@@ -27,31 +27,36 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
         auth.inMemoryAuthentication()
                 .withUser("admin")
-                .password("super_secret_password")
+                .password("12345678")
                 .roles("ADMIN");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //Страница /userInfo требует входа в систему как ROLE_USER
-        // http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('ROLE_USER')");
+
+        http.csrf().disable();
         // Только для роли Admin
-        // http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
-        // Если нет прав (роли) для доступа, будет перенаправлен на страницу регистрации
+        http.authorizeRequests().antMatchers("/user/listUsers").access("hasRole('ROLE_ADMIN')");
+
         // config
-        http.csrf().disable()
-                .authorizeRequests()
+        http.authorizeRequests()
+                .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/user/register").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/listNotes") // поменять на правильный урл
+                .loginProcessingUrl("/j_spring_security_check")
+                .defaultSuccessUrl("/note/listNotes") // поменять на правильный урл
                 .failureUrl("/login?error=true")
-                .usernameParameter("username")
+                .usernameParameter("userName")
                 .passwordParameter("password")
+                .permitAll()
                 // logout config
-                .and().logout().logoutUrl("/logout");
+                .and().logout()
+                .logoutUrl("/logout");
+
+
 
     }
 

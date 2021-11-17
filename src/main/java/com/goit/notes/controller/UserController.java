@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -24,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping(path = "/user")
 public class UserController {
-    
+
     private final UserService userService;
 
     @GetMapping("/register")
@@ -49,10 +50,15 @@ public class UserController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "/listUsers")
-    public ModelAndView showAllUsersPage(ModelAndView model) {
-        model.addObject("users", userService.findAll());
-        model.setViewName("listUsers");
-        return model;
+    public ModelAndView showAllUsersPage(ModelAndView modelAndView, Model model) {
+
+        model.addAttribute("title", "List of Users");
+        model.addAttribute("message", "Hello, admin! This is list of users, who use notes services");
+
+        modelAndView.addObject("users", userService.findAll());
+        modelAndView.setViewName("listUsers");
+
+        return modelAndView;
     }
 
     @ModelAttribute("user")
