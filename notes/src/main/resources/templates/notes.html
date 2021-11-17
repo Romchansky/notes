@@ -21,19 +21,15 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="note : ${notes}">
-                <td> <span th:text="${notes.id}"> Id </span></td>
-                <td> <span th:text="${notes.name}"> Name </span></td>
-                <td> <span th:text="${notes.description}"> Description </span></td>
-                <td> <span th:text="${notes.access}"> Access </span></td>
+
+            <tr th:each="user : ${users}">
+                <td> <span th:text="${note.}"> Id </span></td>
+                <td> <span th:text="${note.name}"> Name </span></td>
+                <td> <span th:text="${note.description}"> Description </span></td>
+                <td> <span th:text="${note.access}"> Access </span></td>
             </tr>
             </tbody>
         </table>
-
-
-
     </div>
-
-
 </body>
 </html>

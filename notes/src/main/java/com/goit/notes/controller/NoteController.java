@@ -4,12 +4,15 @@ package com.goit.notes.controller;
 import com.goit.notes.entity.Note;
 import com.goit.notes.entity.User;
 import com.goit.notes.service.NoteService;
+import com.goit.notes.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,14 +29,17 @@ import java.util.UUID;
 public class NoteController {
 
     private final NoteService noteService;
+    private final UserService userService;
 
     @GetMapping("/listNotes")
-    public ModelAndView listAllNotes(User user, ModelAndView modelAndView, Model model) {
-        Set<Note> notes = user.getNotes();
+    public ModelAndView listAllNotes(@AuthenticationPrincipal User user, ModelAndView modelAndView, Model model) {
+        Optional<User> currentUser = userService.findByName(user.getUserName());
+
+
         model.addAttribute("title", "List Notes");
         model.addAttribute("message", "list all notes");
 
-        modelAndView.addObject("note", notes);
+        modelAndView.addObject("noteList", currentUser.get().getNotes());
         modelAndView.setViewName("listNote");
 
         return modelAndView;
@@ -63,14 +69,17 @@ public class NoteController {
         return "edit";
     }
 
-//    @PostMapping("/edit")
-//    public String editNote(@Valid Note note) {
-//        return "redirect:/notes";
-//    }
-//
-//    @GetMapping("/share/{id}")
-//    public String shareNote(@PathVariable UUID id, Note note) {
-//        return "share";
-//    }
+    @PostMapping("/edit")
+    public String editNote(@Valid Note note) {
+        return "redirect:/notes";
+    }
+
+    @GetMapping("/share/{id}")
+    public String shareNote(@PathVariable UUID id, Note note) {
+
+        Optional<Note> noteById = noteService.findById(id);
+
+        return "share";
+    }
 
 }
