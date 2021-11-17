@@ -1,13 +1,21 @@
 package com.goit.notes.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 
-public interface BaseEntity<ID> extends Serializable {
+public interface BaseEntity<ID, N> extends Serializable {
 
-    Collection<? extends BaseEntity> getBaseEntity();
-    ID getId();
+    boolean isAdmin();
+    Long getId();
     String getPassword();
+    void setPassword(String password);
     String getUsername();
     boolean isEnabled();
+
+    boolean isActive();
+
+    void setActive(boolean active);
+
+    Object getAccess();
+
+    void setUsername(String userName);
 }

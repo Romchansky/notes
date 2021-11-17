@@ -1,6 +1,7 @@
 package com.goit.notes.service;
 
 import com.goit.notes.entity.BaseEntity;
+import com.goit.notes.entity.Note;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,7 +12,7 @@ import java.util.Optional;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public abstract class BaseService<E extends BaseEntity<ID>, ID> {
+public abstract class BaseService<E extends BaseEntity<ID, Note>, ID> {
 
     protected final JpaRepository<E, ID> repository;
 

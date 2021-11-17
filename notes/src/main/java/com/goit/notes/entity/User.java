@@ -5,42 +5,31 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.CascadeType;
-import javax.persistence.GenerationType;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.Enumerated;
-import javax.persistence.EnumType;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
 
-import static org.apache.catalina.realm.UserDatabaseRealm.getRoles;
-
 @Entity
-@Table(name = "user")
+@Table(name = "usr")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 
-public class User implements BaseEntity<UUID> {
+public class User implements BaseEntity<UUID, Note> {
 
     private static final long serialVersionUID = 2868572978213680209L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private UUID id;
+    private Long id;
 
     @NotBlank
     @Size(min = 5, max = 50, message = "Name length must be 5-50 symbols")
@@ -51,13 +40,18 @@ public class User implements BaseEntity<UUID> {
     @Size(min = 8, max = 100, message = "Password  must be 8-100 symbols")
     @Column(name = "password", length = 100)
     private String password;
+    private boolean active;
 
     @Column(name = "user_role", length = 10)
     @Enumerated(EnumType.STRING)
     private Role userRole;
-    private boolean active;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
+
+    @OneToMany(mappedBy = "usr", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude
     private Set<Note> notes;
 
@@ -76,42 +70,74 @@ public class User implements BaseEntity<UUID> {
     }
 
     @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + userName.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + userRole.hashCode();
-        result = 31 * result + notes.hashCode();
-        return result;
-    }
-
     public boolean isAdmin() {
         return roles.contains(Role.ADMIN);
     }
 
     @Override
-    public Collection<? extends BaseEntity> getBaseEntity() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+//    @Override
+//    public int hashCode() {
+//        int result = id.hashCode();
+//        result = 31 * result + userName.hashCode();
+//        result = 31 * result + password.hashCode();
+//        result = 31 * result + userRole.hashCode();
+//        result = 31 * result + notes.hashCode();
+//        return result;
+//    }
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
     }
 
     public String getPassword() {
         return password;
     }
-
     @Override
-    public String getUsername() {
-        return null;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
 
+    @Override
+    public String getUsername() {
+        return userName;
+    }
 
+    @Override
+    public boolean isEnabled() {
+        return isActive();
+    }
+    @Override
+    public boolean isActive() {
+        return active;
+    }
+    @Override
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    @Override
+    public Object getAccess() {
+        return null;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+    @Override
+    public void setUsername(String userName) {
+        this.userName = userName;
+    }
 
 }
