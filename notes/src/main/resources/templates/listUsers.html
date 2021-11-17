@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
 <head>
-    <title>List of users</title>
+    <title th:utext="${title}"></title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -14,7 +15,7 @@ background-size: cover">
 </form>
 </div>
 <div style="text-align: center">
-<h1>Hello, admin! This is list of users, who use notes services </h1>
+<h1><span th:utext="${message}"></span></h1>
 </div>
 <div class="table" style=" border: 10px black; border-collapse: separate; background: beige; text-align: center">
     <table style="border-collapse:collapse">

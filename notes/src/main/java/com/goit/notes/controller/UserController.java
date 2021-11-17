@@ -47,10 +47,12 @@ public class UserController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "/listUsers")
-    public ModelAndView showAllUsersPage(ModelAndView model) {
-        model.addObject ("users", userService.findAll ());
-        model.setViewName ("listUsers");
-        return model;
+    public ModelAndView showAllUsersPage(ModelAndView modelAndView, Model model) {
+        model.addAttribute("title", "List of Users");
+        model.addAttribute("message", "Hello, admin! This is list of users, who use notes services");
+        modelAndView.addObject ("users", userService.findAll ());
+        modelAndView.setViewName ("listUsers");
+        return modelAndView;
     }
 
     @ModelAttribute("user")

@@ -1,35 +1,38 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title th:utext="${title}"></title>
 </head>
 <body>
-<h1>  <span  th:utext="${message}"></span></h1>
-<form th:action="@{/note/listNotes}" method="GET" >
+<h1><span th:utext="${message}"></span></h1>
+<form th:action="@{/note/listNotes}" method="GET">
     <h2>hello list notes</h2>
 </form>
 
-    <div class="table">
-        <table>
-            <thead>
-            <tr>
-                <th> Id </th>
-                <th> Name </th>
-                <th> Description </th>
-                <th > Access </th>
-            </tr>
-            </thead>
-            <tbody>
+<div class="table">
+    <table>
+        <thead>
+        <tr>
+            <th> Id</th>
+            <th> Name</th>
+            <th> Description</th>
+            <th> Access</th>
+        </tr>
+        </thead>
+        <tbody>
 
-            <tr th:each="user : ${users}">
-                <td> <span th:text="${note.}"> Id </span></td>
-                <td> <span th:text="${note.name}"> Name </span></td>
-                <td> <span th:text="${note.description}"> Description </span></td>
-                <td> <span th:text="${note.access}"> Access </span></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+
+        <tr th:each="note : ${noteList}">
+            <td><span th:text="${note.getId()}"> Id </span></td>
+            <td><span th:text="${note.getName()}"> Name </span></td>
+            <td><span th:text="${note.getDescription()}"> Description </span></td>
+            <td><span th:text="${note.getAccess()}"> Access </span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

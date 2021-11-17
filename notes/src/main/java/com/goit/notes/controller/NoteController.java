@@ -33,14 +33,12 @@ public class NoteController {
 
     @GetMapping("/listNotes")
     public ModelAndView listAllNotes(@AuthenticationPrincipal User user, ModelAndView modelAndView, Model model) {
-        Optional<User> currentUser = userService.findByName(user.getUserName());
-
+        Optional<User> userById = userService.findById(user.getId());
 
         model.addAttribute("title", "List Notes");
         model.addAttribute("message", "list all notes");
-
-        modelAndView.addObject("noteList", currentUser.get().getNotes());
-        modelAndView.setViewName("listNote");
+        modelAndView.addObject("noteList", userById.get().getNotes());
+        modelAndView.setViewName("listNotes");
 
         return modelAndView;
     }
