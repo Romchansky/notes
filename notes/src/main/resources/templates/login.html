@@ -13,7 +13,7 @@ background-size: cover;">
     <h1>  <span  th:utext="${message}"></span></h1>
 </div>
 <div class="container">
-    <form th:action="@{/login}" method="GET" >
+    <form action="/j_spring_security_check" method="POST">
 
         <div class="card-body" style="text-align: center">
             <div>
@@ -26,13 +26,11 @@ background-size: cover;">
                        th:required="required"   style=" max-width: 300px; padding: 10px; margin: 0 auto"/>
             </div>
 
-
-            <form th:action="@{/notes}" method="get" >
-            <button class= "btn btn-lg btn-primary" type="submit">LOG IN</button>
-            </form>
+            <button class="btn btn-lg btn-primary" type="submit">LOG IN</button>
 
         </div>
         <h5 class="text-center"><a th:href="@{/user/register}">Don't register? Create account</a>
+            <td th:text="${error} ? 'Wrong login or password. Please, try again.' : ''"></td>
         </h5>
     </form>
 </div>
