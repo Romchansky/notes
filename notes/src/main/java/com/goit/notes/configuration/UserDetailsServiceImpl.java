@@ -1,6 +1,5 @@
 package com.goit.notes.configuration;
 
-import com.goit.notes.entity.User;
 import com.goit.notes.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,54 +13,56 @@ import java.util.Collection;
 import java.util.Collections;
 
 @RequiredArgsConstructor
-@Service(value = "userServiceDetails")
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-        private final UserRepository userRepository;
+    private final UserRepository userRepository;
 
-        @Override
-        public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-            final User user = userRepository.findByUserName (userName)
-                    .orElseThrow (() -> new UsernameNotFoundException (String.format ("user with username %s not exists", userName)));
-            return new UserDetails () {
+    @Override
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
-                private static final long serialVersionUID = -2139361496434151054L;
+        return userRepository.findByUserName(userName)
+                .map(user -> {
+                    return new UserDetails() {
 
-                @Override
-                public Collection<? extends GrantedAuthority> getAuthorities() {
+                        private static final long serialVersionUID = -2139361496434151054L;
 
-                    return Collections.singletonList (new SimpleGrantedAuthority(user.getUserRole ().toString ()));
-                }
+                        @Override
+                        public Collection<? extends GrantedAuthority> getAuthorities() {
+                            return Collections.singletonList(new SimpleGrantedAuthority(user.getUserRole().toString()));
+                        }
 
-                @Override
-                public String getPassword() {
-                    return user.getPassword ();
-                }
+                        @Override
+                        public String getPassword() {
+                            return user.getPassword();
+                        }
 
-                @Override
-                public String getUsername() {
-                    return user.getUserName ();
-                }
+                        @Override
+                        public String getUsername() {
+                            return user.getUserName();
+                        }
 
-                @Override
-                public boolean isAccountNonExpired() {
-                    return true;
-                }
+                        @Override
+                        public boolean isAccountNonExpired() {
+                            return true;
+                        }
 
-                @Override
-                public boolean isAccountNonLocked() {
-                    return true;
-                }
+                        @Override
+                        public boolean isAccountNonLocked() {
+                            return true;
+                        }
 
-                @Override
-                public boolean isCredentialsNonExpired() {
-                    return true;
-                }
+                        @Override
+                        public boolean isCredentialsNonExpired() {
+                            return true;
+                        }
 
-                @Override
-                public boolean isEnabled() {
-                    return true;
-                }
-            };
-        }
+                        @Override
+                        public boolean isEnabled() {
+                            return true;
+                        }
+                    };
+                })
+                .orElseThrow(() -> new UsernameNotFoundException(String.format("user with username %s not exists", userName)));
+    }
 }
