@@ -3,8 +3,7 @@ package com.goit.notes.controller;
 import com.goit.notes.entity.User;
 import com.goit.notes.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,10 +19,8 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping(path = "/user")
-
+@Slf4j
 public class UserController {
-    private static final Log log = LogFactory.getLog (UserController.class);
-
     private final UserService userService;
 
     @GetMapping("/register")
