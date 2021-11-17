@@ -1,8 +1,12 @@
 package com.goit.notes.entity;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import java.io.Serializable;
 
 public interface BaseEntity<ID, N> extends Serializable {
+
+    User loadUserByUsername(String userName) throws UsernameNotFoundException;
 
     boolean isAdmin();
     Long getId();

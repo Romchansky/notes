@@ -1,11 +1,10 @@
 package com.goit.notes.service;
 
+import com.goit.notes.entity.BaseEntity;
+import com.goit.notes.entity.User;
 import com.goit.notes.repository.UserRepository;
 import com.goit.notes.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,16 +15,20 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService implements BaseEntity {
 
     @Autowired
     private UserRepository userRepository;
+    private String userName;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    private Long id;
+    private String password;
+    private boolean active;
 
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+    public User loadUserByUsername(String userName) throws UsernameNotFoundException {
         User user = userRepository.findByUserName(userName);
 
         if (user == null) {
@@ -42,9 +45,9 @@ public class UserService implements UserDetailsService {
             return false;
         }
 
-        //user.setActive(true);
-       // user.setRoles(Collections.singleton(Role.USER));
-       // user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setActive(true);
+        user.setRoles(Collections.singleton(Role.USER));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user);
 
@@ -62,13 +65,13 @@ public class UserService implements UserDetailsService {
                 .map(Role::name)
                 .collect(Collectors.toSet());
 
-        //user.getRoles().clear();
+        user.getRoles().clear();
 
-//        for (String key : form.keySet()) {
-//            if (roles.contains(key)) {
-//                user.getRoles().add(Role.valueOf(key));
-//            }
-//        }
+        for (String key : form.keySet()) {
+            if (roles.contains(key)) {
+                user.getRoles().add(Role.valueOf(key));
+            }
+        }
 
         userRepository.save(user);
     }
@@ -79,19 +82,71 @@ public class UserService implements UserDetailsService {
         boolean isPasswordChanged = (password != null && !password.equals(userPassword)) ||
                 (userPassword != null && !userPassword.equals(password));
 
-//        if (isPasswordChanged) {
-//            user.setPassword(password);
-//
-//        }
-//
-//        if (!StringUtils.isEmpty(password)) {
-//            user.setPassword(password);
-//        }
+        if (isPasswordChanged) {
+            user.setPassword(password);
+
+        }
+
+        if (!StringUtils.isEmpty(password)) {
+            user.setPassword(password);
+        }
 
         userRepository.save(user);
     }
 
     public void registrationUser(User user, BindingResult result) {
 
+    }
+
+    @Override
+    public boolean isAdmin() {
+        return false;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public String getPassword() {
+
+        return password;
+    }
+
+    @Override
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String getUsername() {
+
+        return userName;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
+    @Override
+    public boolean isActive() {
+        return false;
+    }
+
+    @Override
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    @Override
+    public Object getAccess() {
+        return null;
+    }
+
+    @Override
+    public void setUsername(String userName) {
+        this.userName = userName;
     }
 }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -22,7 +23,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @ToString
 
-public class User implements BaseEntity<UUID, Note> {
+public class User implements BaseEntity {
 
     private static final long serialVersionUID = 2868572978213680209L;
 
@@ -70,6 +71,11 @@ public class User implements BaseEntity<UUID, Note> {
     }
 
     @Override
+    public User loadUserByUsername(String userName) throws UsernameNotFoundException {
+        return null;
+    }
+
+    @Override
     public boolean isAdmin() {
         return roles.contains(Role.ADMIN);
     }
@@ -83,15 +89,15 @@ public class User implements BaseEntity<UUID, Note> {
         this.id = id;
     }
 
-//    @Override
-//    public int hashCode() {
-//        int result = id.hashCode();
-//        result = 31 * result + userName.hashCode();
-//        result = 31 * result + password.hashCode();
-//        result = 31 * result + userRole.hashCode();
-//        result = 31 * result + notes.hashCode();
-//        return result;
-//    }
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + userName.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + userRole.hashCode();
+        result = 31 * result + notes.hashCode();
+        return result;
+    }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
