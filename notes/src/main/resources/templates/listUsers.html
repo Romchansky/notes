@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
+<head>
+    <title>List of users</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body style="background-image:url(https://thumbs.dreamstime.com/b/%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%87%D0%B0%D0%BD%D0%B8%D1%8F-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B7%D1%80%D0%B5%D0%BD%D0%B8%D1%8F-%D0%BF%D0%BE%D0%BB%D0%B5%D1%82%D0%B0-%D0%BB%D0%B8%D0%BF%D0%BA%D0%B8%D0%B5-109773277.jpg);
+background-size: cover">
+<div sec:authorize="hasAuthority('ADMIN')" >
+<form th:action="@{user/listUsers}" method="GET" >
+</form>
+</div>
+<div style="text-align: center">
+<h1>Hello, admin! This is list of users, who use notes services </h1>
+</div>
+<div class="table" style=" border: 10px black; border-collapse: separate; background: beige; text-align: center">
+    <table style="border-collapse:collapse">
+        <thead>
+        <tr>
+            <th> ID </th>
+            <th> Username </th>
+            <th> Password </th>
+            <th > Role </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td> <span th:text="${user.getId()}"> ID </span></td>
+            <td> <span th:text="${user.getUserName()}"> Username </span></td>
+            <td> <span th:text="${user.getPassword()}"> Password </span></td>
+            <td> <span th:text="${user.getUserRole()}"> Role </span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
