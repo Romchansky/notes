@@ -24,6 +24,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customUserDetailsService)
@@ -40,12 +41,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable();
-        // Только для роли Admin
         http.authorizeRequests().antMatchers("/user/listUsers").access("hasRole('ROLE_ADMIN')");
-
-
-
-        // config
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
@@ -54,12 +50,11 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/j_spring_security_check")
-                .defaultSuccessUrl("/note/listNotes") // поменять на правильный урл
+                .defaultSuccessUrl("/")
                 .failureUrl("/login?error=true")
                 .usernameParameter("userName")
                 .passwordParameter("password")
                 .permitAll()
-                // logout config
                 .and().logout()
                 .logoutUrl("/logout");
 

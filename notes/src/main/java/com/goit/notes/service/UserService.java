@@ -6,8 +6,6 @@ import com.goit.notes.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -25,27 +23,23 @@ public class UserService extends BaseService<User, UUID> {
     }
 
     public void register(User user) {
-        isExists(user);
+        if (repository.existsByUserName(user.getUserName ())) {
+            log.warn ("Account with provided username already exists");
+        }
         user.setUserRole(Role.ROLE_USER);
         user.setPassword(encoder.encode(user.getPassword()));
         repository.save(user);
     }
 
-    private void isExists(User user) {
-        if (repository.existsByUserName(user.getUserName())) {
-            log.info("Account with provided username already exists");
-        }
-    }
-
-    public Optional<User> findByName(String username){
-        return repository.findByUserName(username);
-    }
-
     @Override
     public User save(User user) {
-        user.setUserRole(user.getUserRole());
+        if (repository.existsByUserName (user.getUserName ())) {
+            log.warn (String.format ("User with specified username [%s] already exists", user.getUserName ()));
+        }
+        user.setUserRole (user.getUserRole ());
+
         user.setPassword(encoder.encode(user.getPassword()));
-        return repository.save(user);
+         return repository.save (user);
     }
 }
 

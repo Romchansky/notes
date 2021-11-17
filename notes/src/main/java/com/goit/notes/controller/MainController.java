@@ -36,8 +36,8 @@ public class MainController {
         model.addAttribute("message", "To start using login or create an account");
         model.addAttribute("error", error);
 
-        if (error != null) log.info("You login or password not corrected, check it and try again");
-        if (logout != null) log.info("You have been logged out");
+        if (error != null) log.warn("You login or password not corrected, check it and try again");
+        if (logout != null) log.warn ("You have been logged out");
 
         return "login";
     }
