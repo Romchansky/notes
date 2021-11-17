@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -34,6 +35,10 @@ public class UserService extends BaseService<User, UUID> {
         if (repository.existsByUserName(user.getUserName())) {
             log.info("Account with provided username already exists");
         }
+    }
+
+    public Optional<User> findByName(String username){
+        return repository.findByUserName(username);
     }
 
     @Override

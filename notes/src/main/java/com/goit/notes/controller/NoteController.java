@@ -2,6 +2,7 @@ package com.goit.notes.controller;
 
 
 import com.goit.notes.entity.Note;
+import com.goit.notes.entity.User;
 import com.goit.notes.service.NoteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -26,8 +28,8 @@ public class NoteController {
     private final NoteService noteService;
 
     @GetMapping("/listNotes")
-    public ModelAndView listAllNotes(ModelAndView modelAndView, Model model) {
-        Iterable<Note> notes = noteService.findAll();
+    public ModelAndView listAllNotes(User user, ModelAndView modelAndView, Model model) {
+        Set<Note> notes = user.getNotes();
         model.addAttribute("title", "List Notes");
         model.addAttribute("message", "list all notes");
 
@@ -61,10 +63,14 @@ public class NoteController {
         return "edit";
     }
 
-    @PostMapping("/edit")
-    public String editNote(@Valid Note note){
-
-        return "redirect:/notes";
-    }
+//    @PostMapping("/edit")
+//    public String editNote(@Valid Note note) {
+//        return "redirect:/notes";
+//    }
+//
+//    @GetMapping("/share/{id}")
+//    public String shareNote(@PathVariable UUID id, Note note) {
+//        return "share";
+//    }
 
 }
