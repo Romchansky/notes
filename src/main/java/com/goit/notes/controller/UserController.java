@@ -10,15 +10,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.UUID;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -42,8 +42,7 @@ public class UserController {
             userService.register(user);
             return "redirect:/login";
         } catch (ImpossibleActionException e) {
-            //TODO
-            //user with provided username already exist
+           log.error ("User with this username already exist");
             return "register";
         }
     }
@@ -61,8 +60,14 @@ public class UserController {
         return modelAndView;
     }
 
+    @GetMapping(path = "/delete_user")
+    public String delete(@RequestParam("id") User user) {
+        userService.delete (user.getId ());
+        return "redirect:/user/listUsers";
+    }
     @ModelAttribute("user")
     public User defaultUser() {
         return new User();
     }
+
 }

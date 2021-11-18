@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @Slf4j
@@ -32,8 +33,8 @@ public abstract class BaseService<E extends BaseEntity<ID>, ID> {
         return findById(id).orElseThrow(()->new RuntimeException("Entity with id " + id + " not exist"));
     }
     
-    public void delete(E e) {
-        repository.delete(e);
+    public void delete(ID id) {
+        repository.deleteById (id);
     }
 
 }
