@@ -1,5 +1,6 @@
 package com.goit.notes.controller;
 
+import com.goit.notes.entity.Access;
 import com.goit.notes.entity.Note;
 
 import com.goit.notes.entity.User;
@@ -47,31 +48,35 @@ public class NoteController {
     public String create(Model model) {
         model.addAttribute("title", "Create Note");
         model.addAttribute("message", "Add new note");
-
         return "createNote";
     }
 
-    @PostMapping("/create")
+    @PostMapping("/createNote")
     public String createNote(@Valid Note note) {
+        note.setUser(user);
         noteService.save(note);
-        return "redirect:/notes";
+        return "redirect:/note/listNotes";
     }
 
-    @GetMapping("/edit")
-    public String edit(UUID id, Model model) {
-        Note note = noteService.getById(id);
+    @GetMapping("/editNote")
+    public String edit(@RequestParam("id") Note note, Model model) {
+
+        Note byId = noteService.getById(note.getId());
+        log.info("id in method edit :" + byId);
+
         model.addAttribute("message", "Edit note");
         model.addAttribute("id", note.getId());
         model.addAttribute("name", note.getName());
         model.addAttribute("description", note.getDescription());
         model.addAttribute("access", note.getAccess());
-        return "edit";
+
+        return "editNote";
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/editNote")
     public String editNote(@Valid Note note) {
-        //todo
-        return "redirect:/notes";
+        noteService.save(note);
+        return "redirect:/note/listNotes";
     }
 
     @GetMapping("/share/{id}")
