@@ -41,8 +41,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
         // config
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/login").permitAll()
                 .antMatchers("/user/register").permitAll()
+                .antMatchers("/login").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -53,7 +53,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .permitAll()
                 // logout config
-                .and().logout()
+                .and()
+                .logout()
                 .logoutUrl("/logout");
 
 

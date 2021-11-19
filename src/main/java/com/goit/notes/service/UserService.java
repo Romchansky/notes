@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -28,8 +29,13 @@ public class UserService extends BaseService<User, UUID> {
         if (repository.existsByUserName(user.getUserName())) 
             throw new ImpossibleActionException("Account with username '" + user.getUserName() + "' already exists");
         user.setPassword(encoder.encode(user.getPassword()));
-        user.setUserRole(Role.ROLE_USER);
+        user.setUserRole(Role.ROLE_ADMIN);
         return repository.save(user);
     }
+
+    public Optional<User> findByName(String name){
+       return repository.findByUserName(name);
+    }
+
 
 }
