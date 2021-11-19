@@ -42,7 +42,7 @@ public class UserController {
             userService.register(user);
             return "redirect:/login";
         } catch (ImpossibleActionException e) {
-           log.error ("User with this username already exist");
+            log.error("User with this username already exist");
             return "register";
         }
     }
@@ -62,9 +62,10 @@ public class UserController {
 
     @GetMapping(path = "/delete_user")
     public String delete(@RequestParam("id") User user) {
-        userService.delete (user.getId ());
+        userService.delete(user.getId());
         return "redirect:/user/listUsers";
     }
+
     @ModelAttribute("user")
     public User defaultUser() {
         return new User();

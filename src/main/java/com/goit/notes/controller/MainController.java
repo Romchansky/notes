@@ -32,6 +32,7 @@ public class MainController {
                         @RequestParam(name = "logout", required = false, defaultValue = "false") String logout,
                         Model model) {
         log.info("LOGIN GET");
+
         model.addAttribute("title", "Login");
         model.addAttribute("message", "To start using login or create an account");
         model.addAttribute("error", error);
