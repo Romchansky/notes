@@ -36,7 +36,7 @@ background-size: cover;">
         <td><span th:text="${note.getAccess()}"> Access </span></td>
      <td align="center">
           <a th:href="@{/note/editNote(id=${note.getId()})}" class="btn btn-danger">Edit</a>
-           <a th:href="@{/note/share(id=${note.getId()})}" class="btn btn-danger">Share</a>
+           <button class="btn btn-danger" >Share</button>
          <a th:href="@{/note/deleteNote(id=${note.getId()})}" class="btn btn-danger">Delete</a>
        </td>
     </tr>
