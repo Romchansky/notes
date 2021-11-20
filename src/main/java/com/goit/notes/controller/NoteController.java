@@ -78,12 +78,20 @@ public class NoteController {
         noteService.save(note);
         return "redirect:/note/listNotes";
     }
+    @GetMapping("/deleteNote")
+    public String deleteNote(@RequestParam("id") Note note) {
+        noteService.delete(note.getId());
+        return "redirect:/note/listNotes";
+    }
 
     @GetMapping("/share/{id}")
     public String shareNote(@PathVariable UUID id, Note note) {
-        //todo
-        return "share";
+      if(note.getAccess ()!=Access.PUBLIC){
+
+      }
+        return "redirect:/note/listNotes";
     }
+
 
     @ModelAttribute("note")
     public Note defaultNote() {
@@ -92,4 +100,4 @@ public class NoteController {
 
 }
 
-// добавить метод удаления по ид
+

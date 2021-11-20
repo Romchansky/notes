@@ -18,7 +18,8 @@ public class MainController {
 
         model.addAttribute("title", "Welcome");
         model.addAttribute("message", "This is welcome page!");
-
+        model.addAttribute ("greeting", "If you want to create note tab the 'create' button"+
+                " Also  you can watch your own list notes, if them exist.");
         return "index";
     }
 

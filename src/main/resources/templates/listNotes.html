@@ -7,15 +7,19 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
-<body  style="background-image:url(https://thumbs.dreamstime.com/b/%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%87%D0%B0%D0%BD%D0%B8%D1%8F-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B7%D1%80%D0%B5%D0%BD%D0%B8%D1%8F-%D0%BF%D0%BE%D0%BB%D0%B5%D1%82%D0%B0-%D0%BB%D0%B8%D0%BF%D0%BA%D0%B8%D0%B5-109773277.jpg);
-background-size: cover">
-<h1>  <span  th:utext="${message}"></span></h1>
+<body style="background-image:url(https://i.pinimg.com/originals/cb/6f/89/cb6f89d56ee15c67d9e782f9473dd865.png);
+background-size: cover;">
 <form th:action="@{/note/listNotes}" method="GET" >
 </form>
-
-<a th:href="@{/note/createNote}"> Create Note </a>
-
-<table border="3" align="center">
+<div style="text-align: center; margin-top: 20px;">
+    <h1><span th:utext="${message}"></span></h1>
+    <a th:href="@{/logout}" style="position: fixed; top: 5px;right: 5px;">
+        <button class="btn btn-lg btn-warning" type="submit">LOG OUT </button></a>
+</div>
+ <div class="table" style=" border: 10px black; border-collapse: collapse; background: beige; margin-top: 45px">
+  <table border="3" align="center">
+    <thead style="border: black 20px">
+    <tr align="center" th:border="3" style="border: black">
     <thead style="border: black 20px">
     <tr align="center" th:border="3" style="border: black">
         <th th:border="3" style="border: black" > ID</th>
@@ -32,9 +36,11 @@ background-size: cover">
         <td><span th:text="${note.getAccess()}"> Access </span></td>
      <td align="center">
           <a th:href="@{/note/editNote(id=${note.getId()})}" class="btn btn-danger">Edit</a>
+           <a th:href="@{/note/share(id=${note.getId()})}" class="btn btn-danger">Share</a>
+         <a th:href="@{/note/deleteNote(id=${note.getId()})}" class="btn btn-danger">Delete</a>
        </td>
     </tr>
 </table>
-
+ </div>
 </body>
 </html>
