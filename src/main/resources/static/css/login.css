@@ -1,0 +1,32 @@
+
+.btn-primary {
+  border: blue 1px solid;
+  color: black;
+  background-color: lightgrey;
+}
+
+.btn {
+  margin: 0 auto;
+  width: 150px;
+  height: 50px;
+}
+
+.newBtn {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.password {
+  margin-top: 30px;
+}
+
+.form-group {
+  text-align: center;
+}
+
+.block {
+
+    padding-top: 35px;
+    padding-bottom: 35px;
+}
+
