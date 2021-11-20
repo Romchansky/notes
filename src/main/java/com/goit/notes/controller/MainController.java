@@ -23,6 +23,7 @@ public class MainController {
         return "index";
     }
 
+
     @PostMapping
     public String doPost() {
         return "index";
