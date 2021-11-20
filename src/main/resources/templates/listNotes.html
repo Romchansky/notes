@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title th:utext="${title}"></title>
@@ -11,10 +11,12 @@
 background-size: cover;">
 <form th:action="@{/note/listNotes}" method="GET" >
 </form>
-<div style="text-align: center; margin-top: 20px;">
+<div style="text-align: center; margin-top: 50px;margin-bottom: 15px">
     <h1><span th:utext="${message}"></span></h1>
     <a th:href="@{/logout}" style="position: fixed; top: 5px;right: 5px;">
         <button class="btn btn-lg btn-warning" type="submit">LOG OUT </button></a>
+<br>
+<a th:href="@{/note/createNote}" style="position: center; margin: 10px" class="btn-lg btn-primary">Create Note</a>
 </div>
  <div class="table" style=" border: 10px black; border-collapse: collapse; background: beige; margin-top: 45px">
   <table border="3" align="center">
@@ -22,7 +24,6 @@ background-size: cover;">
     <tr align="center" th:border="3" style="border: black">
     <thead style="border: black 20px">
     <tr align="center" th:border="3" style="border: black">
-        <th th:border="3" style="border: black" > ID</th>
         <th th:border="3" style="border: black">Name</th>
         <th th:border="3" style="border: black"> Description</th>
         <th th:border="3" style="border: black"> Access</th>
@@ -30,7 +31,6 @@ background-size: cover;">
     </thead>
     <tbody>
     <tr th:each="note : ${notes}">
-        <td><span th:text="${note.getId()}"> ID </span></td>
         <td><span th:text="${note.getName()}"> Name </span></td>
         <td><span th:text="${note.getDescription()}"> Description </span></td>
         <td><span th:text="${note.getAccess()}"> Access </span></td>
