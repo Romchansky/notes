@@ -18,10 +18,11 @@ public class MainController {
 
         model.addAttribute("title", "Welcome");
         model.addAttribute("message", "This is welcome page!");
-        model.addAttribute ("greeting", "If you want to create note tab the 'create' button"+
+        model.addAttribute("greeting", "If you want to create note tab the 'create' button" +
                 " Also  you can watch your own list notes, if them exist.");
         return "index";
     }
+
 
     @PostMapping
     public String doPost() {
@@ -32,6 +33,7 @@ public class MainController {
     public String login(@RequestParam(name = "error", required = false, defaultValue = "false") Boolean error,
                         @RequestParam(name = "logout", required = false, defaultValue = "false") String logout,
                         Model model) {
+
         log.info("LOGIN GET");
 
         model.addAttribute("title", "Login");

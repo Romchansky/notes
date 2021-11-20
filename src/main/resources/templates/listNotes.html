@@ -31,6 +31,7 @@ background-size: cover;">
     </thead>
     <tbody>
     <tr th:each="note : ${notes}">
+        <td><span th:text="${note.getId()}"> ID </span></td>
         <td><span th:text="${note.getName()}"> Name </span></td>
         <td><span th:text="${note.getDescription()}"> Description </span></td>
         <td><span th:text="${note.getAccess()}"> Access </span></td>

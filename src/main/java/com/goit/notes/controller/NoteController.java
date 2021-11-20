@@ -29,6 +29,7 @@ public class NoteController {
     private final NoteService noteService;
     private final UserService userService;
     private User user;
+    private Note currentNote;
 
     @GetMapping("/listNotes")
     public ModelAndView listAllNotes(Model model, ModelAndView modelAndView) {
@@ -60,24 +61,21 @@ public class NoteController {
 
     @GetMapping("/editNote")
     public String edit(@RequestParam("id") Note note, Model model) {
-
-        Note byId = noteService.getById(note.getId());
-        log.info("id in method edit :" + byId);
-
+        currentNote = noteService.getById(note.getId());
         model.addAttribute("message", "Edit note");
-        model.addAttribute("id", note.getId());
-        model.addAttribute("name", note.getName());
-        model.addAttribute("description", note.getDescription());
-        model.addAttribute("access", note.getAccess());
-
+        model.addAttribute("note", currentNote);
         return "editNote";
     }
 
     @PostMapping("/editNote")
     public String editNote(@Valid Note note) {
+        note.setId(currentNote.getId());
+        note.setUser(user);
         noteService.save(note);
         return "redirect:/note/listNotes";
     }
+
+
     @GetMapping("/deleteNote")
     public String deleteNote(@RequestParam("id") Note note) {
         noteService.delete(note.getId());
@@ -86,9 +84,9 @@ public class NoteController {
 
     @GetMapping("/share/{id}")
     public String shareNote(@PathVariable UUID id, Note note) {
-      if(note.getAccess ()!=Access.PUBLIC){
+        if (note.getAccess() != Access.PUBLIC) {
 
-      }
+        }
         return "redirect:/note/listNotes";
     }
 
