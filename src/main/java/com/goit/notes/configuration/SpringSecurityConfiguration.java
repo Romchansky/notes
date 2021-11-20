@@ -35,24 +35,21 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable();
-        // Только для роли Admin
         http.authorizeRequests().antMatchers("/user/listUsers").access("hasRole('ROLE_ADMIN')");
 
-        // config
+
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
                 .antMatchers("/user/register").permitAll()
                 .antMatchers("/login").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/j_spring_security_check")
-                .defaultSuccessUrl("/note/listNotes") // поменять на правильный урл
+                .defaultSuccessUrl("/")
                 .failureUrl("/login?error=true")
                 .usernameParameter("userName")
                 .passwordParameter("password")
                 .permitAll()
-                // logout config
                 .and()
                 .logout()
                 .logoutUrl("/logout");
