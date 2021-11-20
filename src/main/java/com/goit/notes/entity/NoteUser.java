@@ -26,7 +26,7 @@ import java.util.UUID;
 @Table(name = "users")
 @Data
 @NoArgsConstructor
-public class User implements BaseEntity<UUID> {
+public class NoteUser implements BaseEntity<UUID> {
 
     private static final long serialVersionUID = 2868572978213680209L;
 
@@ -53,7 +53,7 @@ public class User implements BaseEntity<UUID> {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "noteUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Note> notes;
 
 }

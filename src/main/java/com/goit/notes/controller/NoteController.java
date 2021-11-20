@@ -3,12 +3,14 @@ package com.goit.notes.controller;
 import com.goit.notes.entity.Access;
 import com.goit.notes.entity.Note;
 
-import com.goit.notes.entity.User;
+import com.goit.notes.entity.NoteUser;
 import com.goit.notes.service.NoteService;
 import com.goit.notes.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,19 +30,17 @@ public class NoteController {
 
     private final NoteService noteService;
     private final UserService userService;
-    private User user;
     private Note currentNote;
 
     @GetMapping("/listNotes")
     public ModelAndView listAllNotes(Model model, ModelAndView modelAndView) {
 
-        Optional<User> authorizedUser = userService.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
-        authorizedUser.ifPresent(entity -> user = entity);
+        NoteUser noteUser = getNoteUser();
 
         model.addAttribute("title", "List Notes");
-        model.addAttribute("message", "Hello " + user.getUserName().toUpperCase() + " this is your list notes");
+        model.addAttribute("message", "Hello " + noteUser.getUserName().toUpperCase() + " this is your list notes");
 
-        modelAndView.addObject("notes", user.getNotes());
+        modelAndView.addObject("notes", noteUser.getNotes());
         modelAndView.setViewName("listNotes");
         return modelAndView;
     }
@@ -53,8 +53,9 @@ public class NoteController {
     }
 
     @PostMapping("/createNote")
-    public String createNote(@Valid Note note) {
-        note.setUser(user);
+    public String createNote(@Valid Note note, @AuthenticationPrincipal User user) {
+        NoteUser noteUser = getNoteUser();
+        note.setNoteUser(noteUser);
         noteService.save(note);
         return "redirect:/note/listNotes";
     }
@@ -70,7 +71,7 @@ public class NoteController {
     @PostMapping("/editNote")
     public String editNote(@Valid Note note) {
         note.setId(currentNote.getId());
-        note.setUser(user);
+        note.setNoteUser(noteUser);
         noteService.save(note);
         return "redirect:/note/listNotes";
     }

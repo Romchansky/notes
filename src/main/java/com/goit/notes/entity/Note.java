@@ -53,6 +53,6 @@ public class Note implements BaseEntity<UUID> {
     @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private NoteUser noteUser;
 
 }

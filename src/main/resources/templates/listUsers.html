@@ -11,7 +11,7 @@
 <body style="background-image:url(https://i.pinimg.com/originals/cb/6f/89/cb6f89d56ee15c67d9e782f9473dd865.png);
 background-size: cover">
 <div sec:authorize="hasAuthority('ADMIN')">
-    <form th:action="@{/user/listUsers}" method="GET">
+    <form th:action="@{/noteUser/listUsers}" method="GET">
     </form>
 </div>
 <div style="text-align: center; margin-top: 20px;">
@@ -30,13 +30,13 @@ background-size: cover">
         </tr>
         </thead>
         <tbody>
-        <tr th:each="user : ${users}">
-            <td><span th:text="${user.getId()}"> ID </span></td>
-            <td><span th:text="${user.getUserName()}"> Username </span></td>
-            <td><span th:text="${user.getPassword()}"> Password </span></td>
-            <td><span th:text="${user.getUserRole()}"> Role </span></td>
+        <tr th:each="noteUser : ${users}">
+            <td><span th:text="${noteUser.getId()}"> ID </span></td>
+            <td><span th:text="${noteUser.getUserName()}"> Username </span></td>
+            <td><span th:text="${noteUser.getPassword()}"> Password </span></td>
+            <td><span th:text="${noteUser.getUserRole()}"> Role </span></td>
             <td align="center">
-                <a th:href="@{/user/delete_user(id=${user.getId()})}" class="btn btn-danger">Delete</a>
+                <a th:href="@{/noteUser/delete_user(id=${noteUser.getId()})}" class="btn btn-danger">Delete</a>
             </td>
                  </tr>
     </table>
