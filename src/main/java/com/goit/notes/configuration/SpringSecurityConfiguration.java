@@ -24,7 +24,9 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(BCryptPasswordEncoder passwordEncoder, 
             UserDetailsService userDetailsService, AuthenticationManagerBuilder auth) {
+
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+
         auth.inMemoryAuthentication()
                 .withUser("admin")
                 .password("super_secret_password")
@@ -35,7 +37,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable();
-        http.authorizeRequests().antMatchers("/user/listUsers").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/noteUser/listUsers").access("hasRole('ROLE_ADMIN')");
 
 
         http.authorizeRequests()
@@ -45,7 +47,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/j_spring_security_check")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/welcomePage")
                 .failureUrl("/login?error=true")
                 .usernameParameter("userName")
                 .passwordParameter("password")

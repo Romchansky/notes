@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 @RequiredArgsConstructor
-@Service
+@Service(value = "userServiceDetails")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;

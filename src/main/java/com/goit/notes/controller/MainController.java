@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/")
 public class MainController {
 
-    @GetMapping
+    @GetMapping("welcomePage")
     public String doGet(Model model) {
 
         model.addAttribute("title", "Welcome");
         model.addAttribute("message", "This is welcome page!");
-        return "index";
+        return "welcomePage";
     }
 
 
-    @PostMapping
+    @PostMapping("welcomePage")
     public String doPost() {
-        return "index";
+        return "welcomePage";
     }
 
     @GetMapping("/login")

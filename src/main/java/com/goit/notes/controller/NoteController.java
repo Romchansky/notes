@@ -19,7 +19,6 @@ import javax.validation.Valid;
 
 
 import java.util.Optional;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @Controller
@@ -79,9 +78,9 @@ public class NoteController {
     }
 
     @GetMapping("/share/{id}")
-    public String shareNote(@PathVariable UUID id, Note note) {
+    public String shareNote(@RequestParam("id") Note note) {
         if (note.getAccess() != Access.PUBLIC) {
-
+            return "Oops something wrong....";
         }
         return "redirect:/note/listNotes";
     }
