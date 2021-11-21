@@ -9,7 +9,7 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body style="padding-left: 15px;padding-right: 20px; background-image:url(https://i.pinimg.com/originals/cb/6f/89/cb6f89d56ee15c67d9e782f9473dd865.png);
-background-size: cover;">
+background-size: cover;font-family: 'Comic Sans MS', arial, serif;">
 <div class="msg" style="max-width: 500px;margin: 0 auto; font-size: 14px; text-align: center;">
     <h1>  <span  th:utext="${message}"></span></h1>
 </div>
@@ -30,7 +30,7 @@ background-size: cover;">
             <button class="btn btn-lg btn-primary" type="submit" style="margin-top: 15px">LOG IN</button>
 
         </div>
-        <h5 class="text-center"><a th:href="@{/noteUser/register}" class="btn btn-lg btn-warning">Don't register? Create account</a>
+        <h5 class="text-center"><a th:href="@{/noteUser/register}" class="btn btn-lg btn-warning">Create account</a>
             <td th:text="${error} ? 'Wrong login or password. Please, try again.' : ''"></td>
         </h5>
     </form>

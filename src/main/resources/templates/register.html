@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title th:utext="${title}"></title>
+    <title th:utext="${title}"></title>>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous"/>
 </head>
 <body style="padding-left: 15px;padding-right: 20px; background-image:url(https://i.pinimg.com/originals/cb/6f/89/cb6f89d56ee15c67d9e782f9473dd865.png);
-background-size: cover;">
+background-size: cover;font-family: 'Comic Sans MS', arial, serif;">
 
 <div class="container">
     <form th:action="@{/noteUser/register}" method="POST">
