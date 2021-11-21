@@ -29,10 +29,10 @@ font-family: 'Comic Sans MS', arial, serif;">
     <table style="border: 3px black; background-color: #e1e1e194; width: 80%; " align="center">
         <thead style="border: black 20px; ">
         <tr align="center" th:border="3" style="border: black">
-            <th style="border: black; text-align: center">#</th>
-            <th style="border: black;  text-align: center">Name</th>
-            <th style="border: black; text-align: center"> Description</th>
-            <th style="border: black; text-align: center"> Access</th>
+            <th style="border: black; text-align: start">#</th>
+            <th style="border: black;  text-align: start">Name</th>
+            <th style="border: black; text-align: start"> Description</th>
+            <th style="border: black; text-align: start"> Access</th>
             <th style="border: black; text-align: center"> Actions</th>
         </tr>
         </thead>
@@ -45,9 +45,14 @@ font-family: 'Comic Sans MS', arial, serif;">
             <td align="center">
                 <a th:href="@{/note/editNote(id=${note.getId()})}" class="btn btn-danger">Edit</a>
                 <a th:href="@{/note/deleteNote(id=${note.getId()})}" class="btn btn-danger">Delete</a>
-                <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="right" data-content="id notes">
-                    Share
-                </button>
+                <a th:href="@{/note/share{id}(id=${note.getId()})}" class="btn btn-danger">share</a>
+
+<!--                <a th:href="@{__${#httpServletRequest.requestURI}__/__${note.getId()}__}">Click to More</a>-->
+
+
+<!--                <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="right" data-content="">-->
+<!--                    Share-->
+<!--                </button>-->
             </td>
         </tr>
     </table>

@@ -4,6 +4,7 @@ import com.goit.notes.entity.Access;
 import com.goit.notes.entity.Note;
 
 import com.goit.notes.entity.NoteUser;
+import com.goit.notes.entity.Role;
 import com.goit.notes.service.NoteService;
 import com.goit.notes.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 
@@ -34,6 +36,8 @@ public class NoteController {
     @GetMapping("/welcomePage")
     public String doGet(Model model) {
 
+//        if(getNoteUser().getUserRole() == Role.ROLE_ADMIN) return "redirect:/noteUser/listUsers";
+
         model.addAttribute("title", "Welcome");
         model.addAttribute("message", "This is welcome page!");
         return "welcomePage";
@@ -43,8 +47,6 @@ public class NoteController {
     public String doPost() {
         return "welcomePage";
     }
-
-
 
 
     @GetMapping("/listNotes")
@@ -94,13 +96,22 @@ public class NoteController {
         return "redirect:/note/listNotes";
     }
 
-    @GetMapping("/share/{id}")
-    public String shareNote(@RequestParam("id") Note note) {
-        if (note.getAccess() != Access.PUBLIC) {
-            return "Oops something wrong....";
-        }
-        return "redirect:/note/listNotes";
+    @GetMapping("/share{id}")
+    public String getURLValue(HttpServletRequest request, Model model, @PathVariable("id") Note note ) {
+        String shareId = request.getRequestURI();
+        model.addAttribute("share_id", shareId + note.getId());
+        log.info("share id :  " + shareId);
+        return "share";
     }
+
+
+//    @GetMapping("/share/{id}")
+//    public String shareNote(@RequestParam("id") Note note) {
+//        if (note.getAccess() != Access.PUBLIC) {
+//            return "Oops something wrong....";
+//        }
+//        return "redirect:/note/listNotes";
+//    }
 
     @ModelAttribute("note")
     public Note defaultNote() {
