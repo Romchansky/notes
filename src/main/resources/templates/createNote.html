@@ -9,9 +9,8 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body style="background-image:url(https://i.pinimg.com/originals/cb/6f/89/cb6f89d56ee15c67d9e782f9473dd865.png);
-background-size: cover">
-
-<h1><span th:utext="${message}" style="margin-top: 200px; margin-left: 65px"></span></h1>
+background-size: cover; font-family: 'Comic Sans MS', arial, serif;" >
+<h1><span th:utext="${message}" style=" margin: 150px;"></span></h1>
 <a th:href="@{/logout}" class="btn-lg btn-warning" style="position: absolute; top: 5px; right: 5px;"> LOG OUT</a>
 <div class="container" style="margin-top: 50px; margin-left: 30px; margin-right: 15px">
     <form th:action="@{/note/createNote}"  method="POST">
