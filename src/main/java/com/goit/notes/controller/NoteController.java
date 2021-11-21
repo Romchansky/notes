@@ -30,6 +30,23 @@ public class NoteController {
     private final UserService userService;
     private Note currentNote;
 
+
+    @GetMapping("/welcomePage")
+    public String doGet(Model model) {
+
+        model.addAttribute("title", "Welcome");
+        model.addAttribute("message", "This is welcome page!");
+        return "welcomePage";
+    }
+
+    @PostMapping("/welcomePage")
+    public String doPost() {
+        return "welcomePage";
+    }
+
+
+
+
     @GetMapping("/listNotes")
     public ModelAndView listAllNotes(Model model, ModelAndView modelAndView) {
 

@@ -8,23 +8,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Map;
+
 @Controller
 @Slf4j
 @RequestMapping("/")
-public class MainController {
-
-    @GetMapping("welcomePage")
-    public String doGet(Model model) {
-
-        model.addAttribute("title", "Welcome");
-        model.addAttribute("message", "This is welcome page!");
-        return "welcomePage";
-    }
+public class LoginController {
 
 
-    @PostMapping("welcomePage")
-    public String doPost() {
-        return "welcomePage";
+    @GetMapping("/")
+    public Object greeting() {
+        return "redirect:/login";
     }
 
     @GetMapping("/login")

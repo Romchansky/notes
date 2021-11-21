@@ -6,6 +6,9 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="//getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
 </head>
 <body style="background-image:url(https://i.pinimg.com/originals/cb/6f/89/cb6f89d56ee15c67d9e782f9473dd865.png);
 background-size: cover;font-family: 'Comic Sans MS', arial, serif;">
@@ -25,7 +28,7 @@ font-family: 'Comic Sans MS', arial, serif;">
 
     <table style="border: 3px black; background-color: #e1e1e194; width: 80%; " align="center">
         <thead style="border: black 20px; ">
-        <tr align="start" th:border="3" style="border: black">
+        <tr align="center" th:border="3" style="border: black">
             <th style="border: black; text-align: center">#</th>
             <th style="border: black;  text-align: center">Name</th>
             <th style="border: black; text-align: center"> Description</th>
@@ -42,11 +45,24 @@ font-family: 'Comic Sans MS', arial, serif;">
             <td align="center">
                 <a th:href="@{/note/editNote(id=${note.getId()})}" class="btn btn-danger">Edit</a>
                 <a th:href="@{/note/deleteNote(id=${note.getId()})}" class="btn btn-danger">Delete</a>
-                <button class="btn btn-danger">Share</button>
+                <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="right" data-content="id notes">
+                    Share
+                </button>
             </td>
         </tr>
     </table>
 
 </div>
+
+<script  type="text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('[data-toggle="popover"]').popover();
+    });
+</script>
+
+
+
 </body>
 </html>
