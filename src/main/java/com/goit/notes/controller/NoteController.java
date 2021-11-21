@@ -8,9 +8,8 @@ import com.goit.notes.service.NoteService;
 import com.goit.notes.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,10 +35,8 @@ public class NoteController {
     public ModelAndView listAllNotes(Model model, ModelAndView modelAndView) {
 
         NoteUser noteUser = getNoteUser();
-
         model.addAttribute("title", "List Notes");
         model.addAttribute("message", "Hello " + noteUser.getUserName().toUpperCase() + " this is your list notes");
-
         modelAndView.addObject("notes", noteUser.getNotes());
         modelAndView.setViewName("listNotes");
         return modelAndView;
@@ -53,9 +50,8 @@ public class NoteController {
     }
 
     @PostMapping("/createNote")
-    public String createNote(@Valid Note note, @AuthenticationPrincipal User user) {
-        NoteUser noteUser = getNoteUser();
-        note.setNoteUser(noteUser);
+    public String createNote(@Valid Note note) {
+        note.setNoteUser(getNoteUser());
         noteService.save(note);
         return "redirect:/note/listNotes";
     }
@@ -71,11 +67,10 @@ public class NoteController {
     @PostMapping("/editNote")
     public String editNote(@Valid Note note) {
         note.setId(currentNote.getId());
-        note.setNoteUser(noteUser);
+        note.setNoteUser(getNoteUser());
         noteService.save(note);
         return "redirect:/note/listNotes";
     }
-
 
     @GetMapping("/deleteNote")
     public String deleteNote(@RequestParam("id") Note note) {
@@ -91,12 +86,15 @@ public class NoteController {
         return "redirect:/note/listNotes";
     }
 
-
     @ModelAttribute("note")
     public Note defaultNote() {
         return new Note();
     }
 
+    private NoteUser getNoteUser() {
+        Optional<NoteUser> authorizedUser = userService.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
+        return authorizedUser.orElseThrow(() -> new UsernameNotFoundException("User is not found"));
+    }
 }
 
 
