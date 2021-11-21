@@ -56,9 +56,9 @@ public class UserController {
     }
 
     @GetMapping(path = "/delete_user")
-    public String delete(@RequestParam("noteUser") NoteUser noteUser) {
+    public String delete(@RequestParam("id") NoteUser noteUser) {
         userService.delete(noteUser.getId());
-        return "redirect:/user/listUsers";
+        return "redirect:/noteUser/listUsers";
     }
 
     @ModelAttribute("user")
