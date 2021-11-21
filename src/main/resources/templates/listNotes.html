@@ -43,8 +43,8 @@ font-family: 'Comic Sans MS', arial, serif;">
             <td><span th:text="${note.getAccess()}"> Access </span></td>
             <td align="center">
                 <a th:href="@{/note/editNote(id=${note.getId()})}" class="btn btn-danger">Edit</a>
-                <button class="btn btn-danger">Share</button>
                 <a th:href="@{/note/deleteNote(id=${note.getId()})}" class="btn btn-danger">Delete</a>
+                <button class="btn btn-danger">Share</button>
             </td>
         </tr>
     </table>
