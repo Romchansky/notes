@@ -15,18 +15,18 @@ background-size: cover; font-family: 'Comic Sans MS', arial, serif; ">
     </form>
 </div>
 <div style="text-align: center; margin-top: 20px;">
-    <h1><span th:utext="${message}"></span></h1>
+    <h1 style="text-align: center; margin-top: 50px"><span th:utext="${message}"></span></h1>
     <a th:href="@{/logout}" style="position: fixed; top: 5px;right: 5px;">
     <button class="btn btn-lg btn-warning" type="submit">LOG OUT </button></a>
-   </div>
-<div class="table" style=" border: 10px black; border-collapse: collapse; margin-top: 45px">
-    <table border="3" align="center">
-        <thead style="border: black 20px">
+   </div><br>
+<br>
+<table style="border: 3px black; background-color: #e1e1e194; width: 80%; " align="center">
+    <thead style="border: black 20px; ">
         <tr align="center" th:border="3" style="border: black">
-            <th th:border="3" style="border: black" > ID</th>
-            <th th:border="3" style="border: black">Username</th>
-            <th th:border="3" style="border: black"> Password</th>
-            <th th:border="3" style="border: black"> Role</th>
+            <th th:border="3" style="border: black; text-align: center"> ID</th>
+            <th th:border="3" style="border: black; text-align: center">Username</th>
+            <th th:border="3" style="border: black; text-align: center"> Password</th>
+            <th th:border="3" style="border: black; text-align: center"> Role</th>
         </tr>
         </thead>
         <tbody>

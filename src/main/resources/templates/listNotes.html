@@ -8,7 +8,7 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body style="background-image:url(https://i.pinimg.com/originals/cb/6f/89/cb6f89d56ee15c67d9e782f9473dd865.png);
-background-size: cover;">
+background-size: cover;font-family: 'Comic Sans MS', arial, serif;">
 <form th:action="@{/note/listNotes}" method="GET">
 </form>
 <div style="text-align: center; margin-top: 50px;margin-bottom: 15px">
@@ -26,11 +26,11 @@ font-family: 'Comic Sans MS', arial, serif;">
     <table style="border: 3px black; background-color: #e1e1e194; width: 80%; " align="center">
         <thead style="border: black 20px; ">
         <tr align="start" th:border="3" style="border: black">
-            <th style="border: black; ">#</th>
-            <th style="border: black; ">Name</th>
-            <th style="border: black;"> Description</th>
-            <th style="border: black;"> Access</th>
-            <th style="border: black;"> Actions</th>
+            <th style="border: black; text-align: center">#</th>
+            <th style="border: black;  text-align: center">Name</th>
+            <th style="border: black; text-align: center"> Description</th>
+            <th style="border: black; text-align: center"> Access</th>
+            <th style="border: black; text-align: center"> Actions</th>
         </tr>
         </thead>
         <tbody style="border: black">
