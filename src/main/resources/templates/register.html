@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title th:utext="${title}"></title>>
+    <title th:utext="${title}"></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous"/>
 </head>
@@ -22,6 +22,7 @@ background-size: cover;font-family: 'Comic Sans MS', arial, serif;">
         <div class="pt-3" style="text-align: center">
             <input class="form-control form-control-sm" type="password" name="password" placeholder="Enter your password" th:autofocus="false"
                    th:required="require"  style=" max-width: 300px; padding: 10px; margin: 0 auto " minlength="8" maxlength="100">
+
 
             <button class="btn btn-lg btn-primary" type="submit">REGISTER</button>
 

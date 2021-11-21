@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 @Controller
-@RequestMapping(path = "/user")
+@RequestMapping(path = "/noteUser")
 public class UserController {
 
     private final UserService userService;
