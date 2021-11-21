@@ -13,7 +13,7 @@ background-size: cover;font-family: 'Comic Sans MS', arial, serif;">
 <div class="container">
 
     <form action="/j_spring_security_check" method="POST">
-        <h2 class="card-header" style="text-align: center"><span  th:utext="${message}"></span></h2>
+        <h2 class="card-header" style="text-align: center; margin-top: 50px"><span  th:utext="${message}"></span></h2>
         <div class="card-body" style="text-align: center">
             <div>
                 <input type="text" class="form-control form-control-sm" name="userName" placeholder="Enter your username"
@@ -28,7 +28,7 @@ background-size: cover;font-family: 'Comic Sans MS', arial, serif;">
             <button class="btn btn-lg btn-primary" type="submit" style="margin-top: 15px">LOG IN</button>
 
         </div>
-        <h5 class="text-center"><a th:href="@{/noteUser/register}" class="btn btn-lg btn-warning">Create account</a>
+        <h5 class="text-center"><a th:href="@{/noteUser/register}" class="btn btn-lg btn-primary">Create account</a>
             <td th:text="${error} ? 'Wrong login or password. Please, try again.' : ''"></td>
         </h5>
     </form>
