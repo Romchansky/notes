@@ -45,29 +45,10 @@ font-family: 'Comic Sans MS', arial, serif;">
             <td align="center">
                 <a th:href="@{/note/editNote(id=${note.getId()})}" class="btn btn-danger">Edit</a>
                 <a th:href="@{/note/deleteNote(id=${note.getId()})}" class="btn btn-danger">Delete</a>
-                <a th:href="@{/note/share{id}(id=${note.getId()})}" class="btn btn-danger">share</a>
-
-<!--                <a th:href="@{__${#httpServletRequest.requestURI}__/__${note.getId()}__}">Click to More</a>-->
-
-
-<!--                <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="right" data-content="">-->
-<!--                    Share-->
-<!--                </button>-->
-            </td>
+                <a th:href="@{/note/share(id=${note.getId()})}" class="btn btn-danger">Share me</a>
+      </td>
         </tr>
     </table>
-
 </div>
-
-<script  type="text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-    $(function () {
-        $('[data-toggle="popover"]').popover();
-    });
-</script>
-
-
-
 </body>
 </html>

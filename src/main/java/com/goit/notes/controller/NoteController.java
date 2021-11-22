@@ -4,7 +4,7 @@ import com.goit.notes.entity.Access;
 import com.goit.notes.entity.Note;
 
 import com.goit.notes.entity.NoteUser;
-import com.goit.notes.entity.Role;
+import com.goit.notes.exception.ImpossibleActionException;
 import com.goit.notes.service.NoteService;
 import com.goit.notes.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +21,7 @@ import javax.validation.Valid;
 
 
 import java.util.Optional;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Controller
@@ -96,22 +97,21 @@ public class NoteController {
         return "redirect:/note/listNotes";
     }
 
-    @GetMapping("/share{id}")
-    public String getURLValue(HttpServletRequest request, Model model, @PathVariable("id") Note note ) {
-        String shareId = request.getRequestURI();
-        model.addAttribute("share_id", shareId + note.getId());
-        log.info("share id :  " + shareId);
-        return "share";
+
+    @GetMapping(path = "/share")
+    public ModelAndView shareNote(@RequestParam(name = "id") UUID id, ModelAndView model) {
+        Note note = noteService.getById (id);
+        if (note.getAccess ().equals (Access.PUBLIC)) {
+            model.addObject ("note", note);
+            model.setViewName ("shared");
+        }
+        if (note.getAccess ().equals (Access.PRIVATE)) {
+        log.warn ("this is private note");
+        model.setViewName ("error");
+    }
+      return model;
     }
 
-
-//    @GetMapping("/share/{id}")
-//    public String shareNote(@RequestParam("id") Note note) {
-//        if (note.getAccess() != Access.PUBLIC) {
-//            return "Oops something wrong....";
-//        }
-//        return "redirect:/note/listNotes";
-//    }
 
     @ModelAttribute("note")
     public Note defaultNote() {
