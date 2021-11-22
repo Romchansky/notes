@@ -1,9 +1,6 @@
 package com.goit.notes.entity;
 
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -56,4 +53,9 @@ public class NoteUser implements BaseEntity<UUID> {
     @OneToMany(mappedBy = "noteUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Note> notes;
 
+    public NoteUser(String userName, String password, Role userRole) {
+        this.userName = userName;
+        this.password = password;
+        this.userRole = userRole;
+    }
 }

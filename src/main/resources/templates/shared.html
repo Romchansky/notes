@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title > Share Page</title>
+    <title> Share Page</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -15,41 +15,41 @@ background-size: cover;font-family: 'Comic Sans MS', arial, serif;">
 <form th:action="@{/note/share}" method="GET">
 </form>
 <h1 style="text-align: center; margin-top: 50px">If you wanna share your note with somebody<br>
- tab the 'share' button, <br> link will be copied to your clipboard</h1>
+    tab the 'share' button, <br> link will be copied to your clipboard</h1>
 <div style="text-align: center; margin-top: 50px;margin-bottom: 15px">
     <a th:href="@{/logout}" style="position: fixed; top: 5px;right: 5px;">
         <button class="btn btn-lg btn-warning" type="submit">LOG OUT</button>
     </a>
     <a th:href="@{/note/listNotes}" class="btn btn-primary">Back to list</a>
     <br>
-<div class="table table-hover"
-     style=" border: 15px black; border-collapse: collapse; position: center; margin-top: 45px;
+    <div class="table table-hover"
+         style=" border: 15px black; border-collapse: collapse; position: center; margin-top: 45px;
 font-family: 'Comic Sans MS', arial, serif;">
-    <table style="border: 3px black; background-color: #e1e1e194; width: 80%; " align="center">
-        <thead style="border: black 20px; ">
-        <tr align="center" th:border="3" style="border: black">
-            <th style="border: black; text-align: center">ID</th>
-            <th style="border: black;  text-align: center">Name</th>
-            <th style="border: black; text-align: center"> Description</th>
-            <th style="border: black; text-align: center"> Access</th>
-            <th style="border: black; text-align: center"> Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td><span th:text="${note.getId()}"> ID </span></td>
-            <td><span th:text="${note.getName()}"> Name </span></td>
-            <td><span th:text="${note.getDescription()}"> Description </span></td>
-            <td><span th:text="${note.getAccess()}"> Access </span></td>
-            <td align="center">
+        <table style="border: 3px black; background-color: #e1e1e194; width: 80%; " align="center">
+            <thead style="border: black 20px; ">
+            <tr align="center" th:border="3" style="border: black">
+                <th style="border: black; text-align: center">ID</th>
+                <th style="border: black;  text-align: center">Name</th>
+                <th style="border: black; text-align: center"> Description</th>
+                <th style="border: black; text-align: center"> Access</th>
+                <th style="border: black; text-align: center"> Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span th:text="${note.getId()}"> ID </span></td>
+                <td><span th:text="${note.getName()}"> Name </span></td>
+                <td><span th:text="${note.getDescription()}"> Description </span></td>
+                <td><span th:text="${note.getAccess()}"> Access </span></td>
+                <td align="center">
                     <button onclick="CopyLink()" class="btn-primary">Share</button>
-            </td>
-        </tr>
-    </table>
-</div>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 
-<script  type="text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script type="text/javascript">
@@ -77,15 +77,10 @@ font-family: 'Comic Sans MS', arial, serif;">
         }
         document.body.removeChild(textArea);
     }
+
     function CopyLink() {
         copyTextToClipboard(location.href);
     }
 </script>
-
-            </td>
-        </tr>
-    </table>
-
-
 </body>
 </html>

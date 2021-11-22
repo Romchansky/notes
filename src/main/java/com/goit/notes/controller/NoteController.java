@@ -5,7 +5,6 @@ import com.goit.notes.entity.Note;
 
 import com.goit.notes.entity.NoteUser;
 import com.goit.notes.entity.Role;
-import com.goit.notes.exception.ImpossibleActionException;
 import com.goit.notes.service.NoteService;
 import com.goit.notes.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 

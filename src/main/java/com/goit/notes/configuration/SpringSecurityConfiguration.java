@@ -27,10 +27,6 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
 
-        auth.inMemoryAuthentication()
-                .withUser("admin")
-                .password("super_secret_password")
-                .roles("ADMIN");
     }
 
     @Override
