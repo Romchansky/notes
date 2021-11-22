@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
+<head>
+    <title th:utext="${title}"></title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body style="background-image:url(https://i.pinimg.com/originals/cb/6f/89/cb6f89d56ee15c67d9e782f9473dd865.png);
+background-size: cover; font-family: 'Comic Sans MS', arial, serif; ">
+<div sec:authorize="hasAuthority('ADMIN')">
+    <form th:action="@{/noteUser/listUsers}" method="GET">
+    </form>
+</div>
+<div style="text-align: center; margin-top: 20px;">
+    <h1 style="text-align: center; margin-top: 50px"><span th:utext="${message}"></span></h1>
+    <a th:href="@{/logout}" style="position: fixed; top: 5px;right: 5px;">
+    <button class="btn btn-lg btn-warning" type="submit">LOG OUT </button></a>
+   </div><br>
+<br>
+<table style="border: 3px black; background-color: #e1e1e194; width: 80%; " align="center">
+    <thead style="border: black 20px; ">
+        <tr align="center" th:border="3" style="border: black">
+            <th th:border="3" style="border: black; text-align: center"> ID</th>
+            <th th:border="3" style="border: black; text-align: center">Username</th>
+            <th th:border="3" style="border: black; text-align: center"> Password</th>
+            <th th:border="3" style="border: black; text-align: center"> Role</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="noteUser : ${users}">
+            <td><span th:text="${noteUser.getId()}"> ID </span></td>
+            <td><span th:text="${noteUser.getUserName()}"> Username </span></td>
+            <td><span th:text="${noteUser.getPassword()}"> Password </span></td>
+            <td><span th:text="${noteUser.getUserRole()}"> Role </span></td>
+            <td align="center">
+                <a th:href="@{/noteUser/delete_user(id=${noteUser.getId()})}" class="btn btn-danger">Delete</a>
+            </td>
+                 </tr>
+    </table>
+</div>
+</body>
+</html>

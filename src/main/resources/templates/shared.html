@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Share Page</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="//getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
+</head>
+<body style="background-image:url(https://i.pinimg.com/originals/cb/6f/89/cb6f89d56ee15c67d9e782f9473dd865.png);
+background-size: cover;font-family: 'Comic Sans MS', arial, serif;">
+<form th:action="@{/note/share}" method="GET">
+</form>
+<h1 style="text-align: center; margin-top: 50px">If you wanna share your note with somebody<br>
+    tab the 'share' button, <br> link will be copied to your clipboard</h1>
+<div style="text-align: center; margin-top: 50px;margin-bottom: 15px">
+    <a th:href="@{/logout}" style="position: fixed; top: 5px;right: 5px;">
+        <button class="btn btn-lg btn-warning" type="submit">LOG OUT</button>
+    </a>
+    <a th:href="@{/note/listNotes}" class="btn btn-primary">Back to list</a>
+    <br>
+    <div class="table table-hover"
+         style=" border: 15px black; border-collapse: collapse; position: center; margin-top: 45px;
+font-family: 'Comic Sans MS', arial, serif;">
+        <table style="border: 3px black; background-color: #e1e1e194; width: 80%; " align="center">
+            <thead style="border: black 20px; ">
+            <tr align="center" th:border="3" style="border: black">
+                <th style="border: black; text-align: center">ID</th>
+                <th style="border: black;  text-align: center">Name</th>
+                <th style="border: black; text-align: center"> Description</th>
+                <th style="border: black; text-align: center"> Access</th>
+                <th style="border: black; text-align: center"> Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span th:text="${note.getId()}"> ID </span></td>
+                <td><span th:text="${note.getName()}"> Name </span></td>
+                <td><span th:text="${note.getDescription()}"> Description </span></td>
+                <td><span th:text="${note.getAccess()}"> Access </span></td>
+                <td align="center">
+                    <button onclick="CopyLink()" class="btn-primary">Share</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script type="text/javascript">
+    function copyTextToClipboard(text) {
+        var textArea = document.createElement("textarea");
+        textArea.style.position = 'fixed';
+        textArea.style.top = 0;
+        textArea.style.left = 0;
+        textArea.style.width = '2em';
+        textArea.style.height = '2em';
+        textArea.style.padding = 0;
+        textArea.style.border = 'none';
+        textArea.style.outline = 'none';
+        textArea.style.boxShadow = 'none';
+        textArea.style.background = 'transparent';
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'successful' : 'unsuccessful';
+            console.log('Copying text command was ' + msg);
+        } catch (err) {
+            console.log('Oops, unable to copy');
+        }
+        document.body.removeChild(textArea);
+    }
+
+    function CopyLink() {
+        copyTextToClipboard(location.href);
+    }
+</script>
+</body>
+</html>

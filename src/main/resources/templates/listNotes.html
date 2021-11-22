@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:utext="${title}"></title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="//getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
+</head>
+<body style="background-image:url(https://i.pinimg.com/originals/cb/6f/89/cb6f89d56ee15c67d9e782f9473dd865.png);
+background-size: cover;font-family: 'Comic Sans MS', arial, serif;">
+<form th:action="@{/note/listNotes}" method="GET">
+</form>
+<div style="text-align: center; margin-top: 50px;margin-bottom: 15px">
+    <h1> <span th:utext="${message}"></span>
+        <span th:text="${notes.size()}"></span> notes in your list</h1>
+
+    <a th:href="@{/logout}" style="position: fixed; top: 5px;right: 5px;">
+        <button class="btn btn-lg btn-warning" type="submit">LOG OUT</button>
+    </a>
+    <br>
+    <a th:href="@{/note/createNote}" style="position: center; margin: 10px" class="btn-lg btn-primary">Create Note</a>
+</div>
+<div class="table table-hover"
+     style=" border: 15px black; border-collapse: collapse; position: center; margin-top: 45px;
+font-family: 'Comic Sans MS', arial, serif;">
+
+    <table style="border: 3px black; background-color: #e1e1e194; width: 80%; " align="center">
+        <thead style="border: black 20px; ">
+        <tr align="center" th:border="3" style="border: black">
+            <th style="border: black; text-align: start">#</th>
+            <th style="border: black;  text-align: start">Name</th>
+            <th style="border: black; text-align: start"> Description</th>
+            <th style="border: black; text-align: start"> Access</th>
+            <th style="border: black; text-align: center"> Actions</th>
+        </tr>
+        </thead>
+        <tbody style="border: black">
+        <tr th:each="note : ${notes}" >
+            <td><span th:text="${noteStat.count}"> # </span></td>
+            <td><span th:text="${note.getName()}"> Name </span></td>
+            <td><span th:text="${note.getDescription()}"> Description </span></td>
+            <td><span th:text="${note.getAccess()}"> Access </span></td>
+            <td align="center">
+                <a th:href="@{/note/editNote(id=${note.getId()})}" class="btn btn-danger">Edit</a>
+                <a th:href="@{/note/deleteNote(id=${note.getId()})}" class="btn btn-danger">Delete</a>
+                <a th:href="@{/note/share(id=${note.getId()})}" class="btn btn-danger">Share me</a>
+      </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
