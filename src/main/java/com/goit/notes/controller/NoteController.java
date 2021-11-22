@@ -4,6 +4,7 @@ import com.goit.notes.entity.Access;
 import com.goit.notes.entity.Note;
 
 import com.goit.notes.entity.NoteUser;
+import com.goit.notes.entity.Role;
 import com.goit.notes.exception.ImpossibleActionException;
 import com.goit.notes.service.NoteService;
 import com.goit.notes.service.UserService;
@@ -33,12 +34,11 @@ public class NoteController {
     private final UserService userService;
     private Note currentNote;
 
-
     @GetMapping("/welcomePage")
     public String doGet(Model model) {
-
-//        if(getNoteUser().getUserRole() == Role.ROLE_ADMIN) return "redirect:/noteUser/listUsers";
-
+        if(getNoteUser().getUserRole() == Role.ROLE_ADMIN) {
+            return "redirect:/noteUser/listUsers";
+        }
         model.addAttribute("title", "Welcome");
         model.addAttribute("message", "This is welcome page!");
         return "welcomePage";
@@ -55,7 +55,7 @@ public class NoteController {
 
         NoteUser noteUser = getNoteUser();
         model.addAttribute("title", "List Notes");
-        model.addAttribute("message", "Hello " + noteUser.getUserName().toUpperCase() + " this is your list notes");
+        model.addAttribute("message", "Hello, " + noteUser.getUserName().toUpperCase()+", there is");
         modelAndView.addObject("notes", noteUser.getNotes());
         modelAndView.setViewName("listNotes");
         return modelAndView;
