@@ -39,7 +39,10 @@ background-size: cover;font-family: 'Comic Sans MS', arial, serif;">
         <div class="form-check">
             <label> <input type="radio" name="access" th:field="*{access}" value="PUBLIC"> </label> Public
         </div>
-        <button class="btn btn-primary" type="submit" style="text-align: center">Create</button>
+        <button class="btn btn-primary" type="submit" style="text-align: center">Save changes</button>
+        <br>
+        <br>
+        <a th:href="@{/note/listNotes}" class="btn btn-danger">Cancel</a>
 
 
 

@@ -28,7 +28,9 @@ background-size: cover;font-family: 'Comic Sans MS', arial, serif;">
             <button class="btn btn-lg btn-primary" type="submit" style="margin-top: 15px">LOG IN</button>
         </div>
         <h5 class="text-center"><a th:href="@{/noteUser/register}" class="btn btn-lg btn-primary">Create account</a>
-            <td th:text="${error} ? 'Wrong login or password. Please, try again.' : ''"></td>
+           <br>
+            <td style="background-color: #e1e1e194; width: 80%;"
+                th:text="${error} ? 'Wrong login or password. Please, try again.' : ''"></td>
         </h5>
     </form>
 </div>
