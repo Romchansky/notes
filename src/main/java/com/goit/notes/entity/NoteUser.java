@@ -1,7 +1,5 @@
 package com.goit.notes.entity;
 
-import lombok.*;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,6 +10,10 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import javax.validation.constraints.NotBlank;
@@ -53,9 +55,4 @@ public class NoteUser implements BaseEntity<UUID> {
     @OneToMany(mappedBy = "noteUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Note> notes;
 
-    public NoteUser(String userName, String password, Role userRole) {
-        this.userName = userName;
-        this.password = password;
-        this.userRole = userRole;
-    }
 }

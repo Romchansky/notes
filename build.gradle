@@ -52,11 +52,3 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-
-if (!hasProperty('mainClass')) {
-    ext.mainClass = 'com.goit.notes.NotesApplication'
-}
-
-springBoot {
-    mainClass = 'com.goit.notes.NotesApplication'
-}

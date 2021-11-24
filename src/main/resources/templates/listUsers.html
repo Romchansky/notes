@@ -25,7 +25,7 @@ background-size: cover; font-family: 'Comic Sans MS', arial, serif; ">
         <tr align="center" th:border="3" style="border: black">
             <th th:border="3" style="border: black; text-align: center"> ID</th>
             <th th:border="3" style="border: black; text-align: center">Username</th>
-            <th th:border="3" style="border: black; text-align: center"> Password</th>
+            <th th:border="3" style="border: black; text-align: center; visibility: hidden"> Password</th>
             <th th:border="3" style="border: black; text-align: center"> Role</th>
         </tr>
         </thead>
@@ -33,7 +33,7 @@ background-size: cover; font-family: 'Comic Sans MS', arial, serif; ">
         <tr th:each="noteUser : ${users}">
             <td><span th:text="${noteUser.getId()}"> ID </span></td>
             <td><span th:text="${noteUser.getUserName()}"> Username </span></td>
-            <td><span th:text="${noteUser.getPassword()}"> Password </span></td>
+            <td><span th:text="${noteUser.getPassword()}" hidden> Password </span></td>
             <td><span th:text="${noteUser.getUserRole()}"> Role </span></td>
             <td align="center">
                 <a th:href="@{/noteUser/delete_user(id=${noteUser.getId()})}" class="btn btn-danger">Delete</a>
