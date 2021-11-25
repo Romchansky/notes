@@ -2,7 +2,6 @@ package com.goit.notes.controller;
 
 import com.goit.notes.entity.Access;
 import com.goit.notes.entity.Note;
-
 import com.goit.notes.entity.NoteUser;
 import com.goit.notes.entity.Role;
 import com.goit.notes.service.NoteService;
@@ -19,10 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.validation.Valid;
-
-
 import java.util.Optional;
 import java.util.UUID;
 
@@ -38,7 +34,8 @@ public class NoteController {
 
     @GetMapping("/welcomePage")
     public String doGet(Model model) {
-        if(getNoteUser().getUserRole() == Role.ROLE_ADMIN) {
+
+        if(getNoteUser ().getUserRole() == Role.ROLE_ADMIN) {
             return "redirect:/noteUser/listUsers";
         }
         model.addAttribute("title", "Welcome");
@@ -48,6 +45,9 @@ public class NoteController {
 
     @PostMapping("/welcomePage")
     public String doPost() {
+        if(getNoteUser ().getUserRole() == Role.ROLE_ADMIN) {
+            return "redirect:/noteUser/listUsers";
+        }
         return "welcomePage";
     }
 
@@ -113,7 +113,6 @@ public class NoteController {
     }
       return model;
     }
-
 
     @ModelAttribute("note")
     public Note defaultNote() {
